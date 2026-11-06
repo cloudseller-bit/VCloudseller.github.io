@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E0720">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SAD-A-F MART">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>SAD-A-F MART</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a night-time garden scene fixed behind frosted-glass panels. Violet gradient is the single bold accent. */
+:root{
+  --bg:#0E0720;
+  --ink:#F4EFFF;
+  --muted:#BBAEDD;
+  --glass:rgba(34,20,70,.55);
+  --glass-strong:rgba(44,26,90,.72);
+  --field:rgba(10,5,26,.6);
+  --line:rgba(196,168,255,.22);
+  --accent:#A56BFF;
+  --accent-soft:#D6BCFF;
+  --grad:linear-gradient(135deg,#7B3BF0 0%,#B53AD9 100%);
+  --ok:#4ADE80;
+  --font-display:"Sora","Segoe UI",system-ui,sans-serif;
+  --font-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
+body{
+  margin:0;overflow-x:hidden;
+  background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;
+}
+input,textarea,select,.msg{-webkit-user-select:text;user-select:text}
+.wrap{
+  max-width:980px;margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+
+/* Background scene: animated black hole on a canvas */
+#hole{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block;background:#05020C;pointer-events:none}
+
+/* Shared surfaces */
+.glass{
+  background:var(--glass);border:1px solid var(--line);border-radius:22px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.label{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-soft)}
+
+/* Top bar */
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:18px}
+.brand{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,4.6vw,26px);letter-spacing:.02em;
+  background:linear-gradient(90deg,#fff,#D9BFFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.open{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;
+  background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.open i{width:8px;height:8px;border-radius:50%;background:var(--ok);display:block;box-shadow:0 0 10px var(--ok)}
+
+/* Hero */
+.hero{padding-block:36px 24px}
+.hero h1{font-weight:800;font-size:clamp(36px,8vw,68px);line-height:1.04;letter-spacing:-.02em;max-width:15ch}
+.hero h1 .g{background:linear-gradient(90deg,#C9A4FF,#F08BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .bn{font-size:clamp(18px,3.4vw,23px);font-weight:500;margin:16px 0 0;color:var(--accent-soft)}
+.hero p.lead{max-width:56ch;margin:12px 0 0;font-size:17px;color:var(--muted)}
+.games{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.games li{padding:6px 14px;border-radius:999px;font-weight:700;font-size:14px;background:var(--glass);border:1px solid var(--line)}
+.games li.more{font-weight:500;color:var(--muted);border-style:dashed}
+.contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.numline{font-size:14px;color:var(--muted);margin:12px 0 0;overflow-wrap:anywhere}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;
+  color:#fff;background:var(--grad);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:13px 24px;
+  box-shadow:0 10px 28px rgba(140,60,230,.38);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 14px 34px rgba(160,70,240,.5)}
+.btn.alt{background:var(--glass);border-color:var(--line);box-shadow:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn.alt:hover{border-color:var(--accent);box-shadow:0 10px 26px rgba(120,60,220,.3)}
+.btn:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+
+/* Sections */
+section{padding-block:26px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head h2{font-size:clamp(24px,5vw,34px);font-weight:700;letter-spacing:-.01em}
+
+/* Price cards */
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.tag{
+  position:relative;display:flex;flex-direction:column;min-width:0;padding:20px 18px 22px;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.tag:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 16px 40px rgba(110,50,210,.35)}
+.price{display:flex;align-items:flex-start;gap:5px;margin-top:12px;font-family:var(--font-display);font-weight:800;line-height:1}
+.price b{font-size:clamp(44px,9vw,58px);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price sup{font-size:15px;font-weight:700;margin-top:6px;color:var(--accent-soft)}
+.tag h3{font-size:19px;font-weight:700;margin-top:12px}
+.tag .note{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.tag.best{background:var(--grad);border-color:rgba(255,255,255,.35);box-shadow:0 18px 46px rgba(150,60,230,.5)}
+.tag.best .label,.tag.best .note,.tag.best .price sup{color:#fff}
+.tag.best .note{opacity:.92}
+.flag{position:absolute;top:14px;right:14px;background:#fff;color:#5A1DC2;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+.fine{margin:14px 0 0;color:var(--muted);font-size:14px}
+@media (max-width:600px){.tag.best{grid-column:1/-1}}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;padding:18px;min-width:0}
+.steps li::before{
+  content:counter(s);display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+  background:var(--grad);font-family:var(--font-display);font-weight:800;font-size:15px;margin-bottom:12px;
+}
+.steps strong{display:block;font-family:var(--font-display);font-size:17px;font-weight:700}
+.steps span{color:var(--muted);font-size:15px}
+
+/* Order counter */
+.counter{background:var(--glass-strong);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;border-radius:26px}
+@media (max-width:720px){.counter{grid-template-columns:minmax(0,1fr);padding:18px}}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+label{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft)}
+select,input{
+  font:inherit;color:var(--ink);background:var(--field);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;width:100%;min-width:0;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(165,107,255,.25)}
+select option{background:#1B0F3B;color:#fff}
+input::placeholder{color:#8C7FB3}
+.out{display:flex;flex-direction:column;gap:12px;min-width:0}
+.msg{
+  margin:0;border:1px dashed var(--line);border-radius:14px;padding:14px;background:var(--field);
+  font-family:var(--font-mono);font-size:13.5px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;flex:1;
+}
+.status{min-height:1.4em;font-size:14px;color:var(--ok);margin:0;font-weight:700}
+
+/* Items shop */
+.group{margin-bottom:24px}
+.group h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.items{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:14px;padding:14px 18px;color:var(--ink);text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.item:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 28px rgba(110,50,210,.3)}
+.item:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.item .nm{font-weight:700;min-width:0;overflow-wrap:anywhere}
+.item .nm small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.item .pr{font-family:var(--font-display);font-weight:800;font-size:20px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.item .go{font-size:13px;font-weight:700;color:var(--accent-soft);white-space:nowrap}
+
+/* Reviews */
+.rev{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px}
+@media (max-width:720px){.rev{grid-template-columns:minmax(0,1fr)}}
+.rev>div{padding:22px;min-width:0}
+.score{font-family:var(--font-display);font-weight:800;font-size:48px;line-height:1}
+.score small{font-size:16px;font-weight:600;color:var(--muted)}
+.stars{display:flex;gap:4px;margin:10px 0}
+.star{font-size:30px;line-height:1;background:none;border:0;padding:2px;cursor:pointer;color:#6B5A99;border-radius:8px}
+.star.on{color:#FFC857}
+.star:focus-visible{outline:3px solid var(--accent-soft)}
+textarea{font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:14px;padding:12px 14px;width:100%;min-width:0;min-height:96px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(165,107,255,.25)}
+textarea::placeholder{color:#8C7FB3}
+.empty{margin:0;color:var(--muted);font-size:15px}
+
+.rlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:16px}
+.rcard{padding:18px;min-width:0}
+.rcard .who{font-weight:700;overflow-wrap:anywhere}
+.rcard .rs{color:#FFC857;letter-spacing:2px;font-size:15px}
+.rcard p{margin:8px 0 0;color:var(--muted);overflow-wrap:anywhere}
+.rcard small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+footer{padding-block:34px 52px;margin-top:18px;color:var(--muted);font-size:14px}
+footer .wrap{border-top:1px solid var(--line);padding-top:26px}
+footer .brand{display:inline-block;font-size:20px;margin-bottom:6px}
+footer a{color:var(--accent-soft);font-weight:700}
+
+@media (max-width:760px),(pointer:coarse){
+  .glass,.open,.btn.alt{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .glass{background:rgba(24,12,54,.86)}
+  .open{background:rgba(24,12,54,.86)}
+  .btn.alt{background:rgba(24,12,54,.86)}
+  .counter.glass{background:rgba(30,16,68,.92)}
+}
+@media (hover:none){
+  .tag:hover,.item:hover,.btn:hover{transform:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .7s ease both}
+  .rise.d1{animation-delay:.08s}
+  .rise.d2{animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tw{animation:none}
+  .tag,.btn{transition:none}
+}
+</style>
+
+</head>
+<body>
+<canvas id="hole" aria-hidden="true"></canvas>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">SAD-A-F MART</span>
+    <span class="open"><i></i>Taking orders</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1 class="rise">Your farm keeps <span class="g">running</span> while you sleep.</h1>
+    <p class="bn rise d1">আপনি ঘুমান, ফার্ম চলতে থাকুক।</p>
+    <p class="lead rise d1">Cloud AFK farming for Roblox. Pick a time slot, send your username, and your game keeps farming on our cloud instead of your phone or PC.</p>
+    <ul class="games rise d2" aria-label="Supported games">
+      <li>Steal an Egg</li>
+      <li>Grow a Garden</li>
+      <li class="more">and other games</li>
+    </ul>
+    <div class="contact rise d2">
+      <a class="btn" href="https://wa.me/8801708763962" target="_blank" rel="noopener">Message on WhatsApp</a>
+      <a class="btn alt" href="https://www.facebook.com/normalkid009" target="_blank" rel="noopener">Facebook page</a>
+      <button class="btn alt" id="install" type="button" hidden>Install app</button>
+    </div>
+    <p class="numline" id="iosHint" hidden>To install on iPhone: tap the Share button in Safari, then Add to Home Screen.</p>
+    <p class="numline">WhatsApp: +8801708763962</p>
+  </div>
+
+  <section aria-labelledby="prices">
+    <div class="sec-head">
+      <h2 id="prices">AFK farming prices</h2>
+      <span class="label">Cloud farming</span>
+    </div>
+    <div class="shelf">
+      <article class="tag glass">
+        <span class="label">12 hours</span>
+        <div class="price"><b>40</b><sup>TK</sup></div>
+        <h3>Overnight</h3>
+        <p class="note">One night of farming.</p>
+      </article>
+      <article class="tag glass">
+        <span class="label">24 hours</span>
+        <div class="price"><b>70</b><sup>TK</sup></div>
+        <h3>Full day</h3>
+        <p class="note">A full day and night.</p>
+      </article>
+      <article class="tag glass">
+        <span class="label">48 hours</span>
+        <div class="price"><b>100</b><sup>TK</sup></div>
+        <h3>Weekend</h3>
+        <p class="note">50 TK per day.</p>
+      </article>
+      <article class="tag glass">
+        <span class="label">7 days</span>
+        <div class="price"><b>240</b><sup>TK</sup></div>
+        <h3>Weekly</h3>
+        <p class="note">About 34 TK per day.</p>
+      </article>
+      <article class="tag glass best">
+        <span class="flag">Best value</span>
+        <span class="label">30 days</span>
+        <div class="price"><b>640</b><sup>TK</sup></div>
+        <h3>Monthly</h3>
+        <p class="note">About 21 TK per day.</p>
+      </article>
+    </div>
+    <p class="fine">All prices are in Bangladeshi Taka (TK).</p>
+  </section>
+
+  <section aria-labelledby="items">
+    <div class="sec-head">
+      <h2 id="items">Roblox items</h2>
+      <span class="label">Tap an item to order</span>
+    </div>
+
+    <div class="group">
+      <h3>Robux</h3>
+      <div class="items">
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Robux" data-price="1 TK per 1 Robux">
+          <span class="nm">Robux<small>Tell us how many Robux you need</small></span>
+          <span class="pr">1 TK</span><span class="go">Order</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Grow a Garden pets</h3>
+      <div class="items">
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Mimic (Grow a Garden pet)" data-price="20 TK">
+          <span class="nm">Mimic</span><span class="pr">20 TK</span><span class="go">Order</span>
+        </a>
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Ghostly Spider (Grow a Garden pet)" data-price="800 TK">
+          <span class="nm">Ghostly Spider</span><span class="pr">800 TK</span><span class="go">Order</span>
+        </a>
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="1,000 tokens" data-price="170 TK">
+          <span class="nm">Tokens<small>1,000 tokens</small></span><span class="pr">170 TK</span><span class="go">Order</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Anime Dice</h3>
+      <div class="items">
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Anime Dice 1 OC" data-price="4 TK">
+          <span class="nm">1 OC</span><span class="pr">4 TK</span><span class="go">Order</span>
+        </a>
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Anime Dice 10 OC" data-price="10 TK">
+          <span class="nm">10 OC</span><span class="pr">10 TK</span><span class="go">Order</span>
+        </a>
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Anime Dice 40 OC" data-price="20 TK">
+          <span class="nm">40 OC</span><span class="pr">20 TK</span><span class="go">Order</span>
+        </a>
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Anime Dice 100 OC" data-price="40 TK">
+          <span class="nm">100 OC</span><span class="pr">40 TK</span><span class="go">Order</span>
+        </a>
+        <a class="item glass" href="https://wa.me/8801708763962" target="_blank" rel="noopener" data-item="Anime Dice jackpot spin" data-price="10 TK each">
+          <span class="nm">Jackpot spins<small>Price per spin</small></span><span class="pr">10 TK</span><span class="go">Order</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how">
+    <div class="sec-head">
+      <h2 id="how">How an order works</h2>
+    </div>
+    <ol class="steps">
+      <li class="glass"><strong>Pick a plan</strong><span>Choose the hours and the game.</span></li>
+      <li class="glass"><strong>Send the message</strong><span>Use the order counter below and send it to the shop.</span></li>
+      <li class="glass"><strong>Farm starts</strong><span>Your game runs on our cloud for the time you paid for.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="order">
+    <div class="sec-head">
+      <h2 id="order">Order counter</h2>
+      <span class="label">Build your message</span>
+    </div>
+    <div class="counter glass">
+      <form id="orderForm" novalidate>
+        <div class="field">
+          <label for="plan">Plan</label>
+          <select id="plan">
+            <option value="12 hours|40 TK">12 hours · 40 TK</option>
+            <option value="24 hours|70 TK" selected>24 hours · 70 TK</option>
+            <option value="48 hours|100 TK">48 hours · 100 TK</option>
+            <option value="7 days|240 TK">7 days · 240 TK</option>
+            <option value="30 days|640 TK">30 days · 640 TK</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="game">Game</label>
+          <select id="game">
+            <option>Grow a Garden</option>
+            <option>Steal an Egg</option>
+            <option>Another game</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="user">Roblox username</label>
+          <input id="user" type="text" autocomplete="off" placeholder="Your Roblox username" maxlength="40">
+        </div>
+      </form>
+      <div class="out">
+        <label>Message to send</label>
+        <pre class="msg" id="msg" aria-live="polite"></pre>
+        <button class="btn" id="copy" type="button">Copy message</button>
+        <a class="btn alt" id="wa" href="https://wa.me/8801708763962" target="_blank" rel="noopener">Send on WhatsApp</a>
+        <a class="btn alt" href="https://www.facebook.com/normalkid009" target="_blank" rel="noopener">Open Facebook</a>
+        <p class="status" id="status" role="status"></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="reviews">
+    <div class="sec-head">
+      <h2 id="reviews">Ratings and reviews</h2>
+      <span class="label">From real buyers</span>
+    </div>
+    <div class="rev">
+      <div class="glass">
+        <div class="score" id="avg">New <small>shop</small></div>
+        <div class="stars" id="avgStars" aria-hidden="true"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="empty" id="avgNote">No ratings yet. Be the first to rate the shop.</p>
+      </div>
+      <div class="glass">
+        <h3 style="font-size:19px;margin-bottom:12px">Rate your order</h3>
+        <label id="rateLabel">Your rating</label>
+        <div class="stars" id="stars" role="radiogroup" aria-labelledby="rateLabel"></div>
+        <div class="field">
+          <label for="rname">Your name or Roblox username</label>
+          <input id="rname" type="text" autocomplete="off" maxlength="40" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="rtext">Your review</label>
+          <textarea id="rtext" maxlength="400" placeholder="How was your order?"></textarea>
+        </div>
+        <input class="hp" id="rweb" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" id="rsend" type="button">Submit review</button>
+        <p class="status" id="rstatus" role="status"></p>
+      </div>
+    </div>
+    <div class="rlist" id="rlist"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">SAD-A-F MART</span><br>
+    Roblox items and cloud AFK farming. Order on <a href="https://wa.me/8801708763962" target="_blank" rel="noopener">WhatsApp +8801708763962</a> or <a href="https://www.facebook.com/normalkid009" target="_blank" rel="noopener">Facebook</a>.
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Black hole background */
+  (function(){
+    var cv=document.getElementById('hole'),ctx=cv.getContext('2d');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W=0,H=0,dpr=1,R=0,CX=0,CY=0,glow=null,stars=[],parts=[],last=0,small=false,lastW=0,TAU=Math.PI*2;
+    var pal=['#FFF0FF','#FFD6FA','#FFB3F2','#FF8BEA','#EC7CF5','#C879FF','#A66BFF','#8658F0','#6B48DC','#5638BC','#4A2FA0','#3E2A88'];
+    function rnd(a,b){return a+Math.random()*(b-a)}
+    function makeGlow(){
+      var s=Math.ceil(R*9);
+      glow=document.createElement('canvas');glow.width=Math.ceil(s*dpr);glow.height=Math.ceil(s*dpr);
+      glow.cssSize=s;
+      var g=glow.getContext('2d'),c=s/2,gr;
+      g.scale(dpr,dpr);
+      gr=g.createRadialGradient(c,c,R*.9,c,c,R*4.4);
+      gr.addColorStop(0,'rgba(190,110,255,.5)');gr.addColorStop(.3,'rgba(120,50,220,.24)');gr.addColorStop(1,'rgba(60,20,140,0)');
+      g.fillStyle=gr;g.fillRect(0,0,s,s);
+      function disk(alpha){
+        g.save();g.translate(c,c);g.scale(1,.3);
+        var d=g.createRadialGradient(0,0,R*1.02,0,0,R*4.2);
+        d.addColorStop(0,'rgba(255,235,255,'+alpha+')');d.addColorStop(.16,'rgba(255,140,235,'+(alpha*.6)+')');
+        d.addColorStop(.5,'rgba(150,70,255,'+(alpha*.25)+')');d.addColorStop(1,'rgba(90,30,200,0)');
+        g.fillStyle=d;g.beginPath();g.arc(0,0,R*4.2,0,TAU);g.fill();g.restore();
+      }
+      disk(.85);
+      g.fillStyle='#000';g.beginPath();g.arc(c,c,R,0,TAU);g.fill();
+      g.lineWidth=Math.max(2,R*.06);g.strokeStyle='rgba(255,228,255,.92)';
+      g.shadowColor='#C58BFF';g.shadowBlur=R*.45;
+      g.beginPath();g.arc(c,c,R*1.03,0,TAU);g.stroke();
+      g.shadowBlur=0;
+      /* front half of the disk passes in front of the hole */
+      g.save();g.beginPath();g.rect(0,c+R*.05,s,s);g.clip();disk(.7);g.restore();
+    }
+    function seed(){
+      var n=small?120:230,m=small?70:150,i;
+      parts=[];stars=[];
+      for(i=0;i<n;i++)parts.push({a:rnd(0,TAU),r:rnd(R*1.2,R*4.4),s:rnd(.7,1.9)});
+      for(i=0;i<m;i++)stars.push({x:Math.random(),y:Math.random(),r:rnd(.4,1.3),p:rnd(0,TAU)});
+    }
+    function resize(){
+      var w=window.innerWidth;
+      if(w===lastW&&glow)return;
+      lastW=w;W=w;H=window.innerHeight;small=W<760;
+      dpr=Math.min(window.devicePixelRatio||1,small?1.5:2);
+      cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+      R=Math.min(W,H)*(small?.13:.15);
+      CX=W*(small?.5:.7);CY=H*(small?.26:.42);
+      makeGlow();seed();
+    }
+    function drawParts(front,off,dt){
+      for(var i=0;i<parts.length;i++){
+        var p=parts[i],sn=Math.sin(p.a);
+        if((sn>=0)!==front)continue;
+        var k=Math.min(1,Math.max(0,(p.r-R)/(R*3.4)));
+        ctx.fillStyle=pal[Math.min(11,(k*11)|0)];
+        var z=p.s*(1.5-k*.7);
+        ctx.fillRect(CX+Math.cos(p.a)*p.r,CY+off+sn*p.r*.3,z,z);
+      }
+    }
+    function step(dt){
+      for(var i=0;i<parts.length;i++){
+        var p=parts[i],q=R*2.4/p.r;
+        p.a+=dt*.5*q*q;
+        p.r-=dt*R*.06*q;
+        if(p.r<R*1.12){p.r=rnd(R*3.8,R*4.6);p.a=rnd(0,TAU)}
+      }
+    }
+    function frame(t){
+      var dt=Math.min(.05,(t-last)/1000)||.016;last=t;
+      var off=-Math.min(window.pageYOffset||0,1400)*.07;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.globalAlpha=1;ctx.fillStyle='#05020C';ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='#fff';
+      for(var i=0;i<stars.length;i++){
+        var s=stars[i];
+        ctx.globalAlpha=reduce?.6:.35+.4*Math.sin(t/1500+s.p);
+        ctx.fillRect(s.x*W,s.y*H,s.r,s.r);
+      }
+      ctx.globalAlpha=1;
+      drawParts(false,off);
+      ctx.drawImage(glow,CX-glow.cssSize/2,CY+off-glow.cssSize/2,glow.cssSize,glow.cssSize);
+      drawParts(true,off);
+      ctx.fillStyle=small?'rgba(5,2,12,.45)':'rgba(5,2,12,.28)';ctx.fillRect(0,0,W,H);
+      if(!reduce){step(dt);requestAnimationFrame(frame)}
+    }
+    resize();
+    window.addEventListener('resize',function(){resize();if(reduce)frame(0)});
+    requestAnimationFrame(frame);
+  })();
+
+  /* Order message */
+  var plan=document.getElementById('plan'),game=document.getElementById('game'),user=document.getElementById('user');
+  var msg=document.getElementById('msg'),btn=document.getElementById('copy'),status=document.getElementById('status');
+  var wa=document.getElementById('wa');
+  function build(){
+    var p=plan.value.split('|');
+    var name=user.value.trim()||'(your username)';
+    msg.textContent='Hi SAD-A-F MART! I want the '+p[0]+' AFK farming plan ('+p[1]+') for '+game.value+'.\nMy Roblox username: '+name;
+    wa.href='https://wa.me/8801708763962?text='+encodeURIComponent(msg.textContent);
+  }
+  plan.addEventListener('change',build);
+  game.addEventListener('change',build);
+  user.addEventListener('input',build);
+  document.getElementById('orderForm').addEventListener('submit',function(e){e.preventDefault()});
+  function fallback(){
+    var r=document.createRange();r.selectNodeContents(msg);
+    var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+    status.textContent='Message selected. Copy it manually.';
+  }
+  btn.addEventListener('click',function(){
+    var text=msg.textContent;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){status.textContent='Copied. Now send it to the shop.'},fallback);
+    }else{fallback()}
+  });
+  build();
+
+  /* Item order links */
+  var items=document.querySelectorAll('a.item');
+  for(var k=0;k<items.length;k++){
+    var it=items[k];
+    it.href='https://wa.me/8801708763962?text='+encodeURIComponent('Hi SAD-A-F MART! I want to buy: '+it.getAttribute('data-item')+' ('+it.getAttribute('data-price')+').\nMy Roblox username: ');
+  }
+
+  /* Reviews: shown publicly after the shop approves them (needs a free Firebase project) */
+  var FB={projectId:'sadafmart-6abd2',apiKey:'AIzaSyC_3DRxGo7BwEj1icqFRdMXKCY--3CyYXo'};
+  var live=!!(FB.projectId&&FB.apiKey);
+  var base='https://firestore.googleapis.com/v1/projects/'+FB.projectId+'/databases/(default)/documents';
+  var rating=0,starsBox=document.getElementById('stars'),rsend=document.getElementById('rsend');
+  var rname=document.getElementById('rname'),rtext=document.getElementById('rtext'),rstatus=document.getElementById('rstatus');
+  var rweb=document.getElementById('rweb'),rlist=document.getElementById('rlist');
+  var avgEl=document.getElementById('avg'),avgStars=document.getElementById('avgStars'),avgNote=document.getElementById('avgNote');
+  var starBtns=[];
+  function say(t,ok){rstatus.style.color=ok?'var(--ok)':'var(--accent-soft)';rstatus.textContent=t}
+  function paint(){
+    for(var i=0;i<starBtns.length;i++){
+      starBtns[i].className='star'+(i<rating?' on':'');
+      starBtns[i].setAttribute('aria-checked',(i+1===rating)?'true':'false');
+    }
+  }
+  for(var s=1;s<=5;s++){
+    (function(n){
+      var b=document.createElement('button');
+      b.type='button';b.className='star';b.textContent='★';
+      b.setAttribute('role','radio');b.setAttribute('aria-label',n+' star'+(n>1?'s':''));
+      b.addEventListener('click',function(){rating=n;paint();say('')});
+      starsBox.appendChild(b);starBtns.push(b);
+    })(s);
+  }
+  function renderReviews(list){
+    rlist.textContent='';
+    if(!list.length){avgEl.innerHTML='New <small>shop</small>';avgNote.textContent='No ratings yet. Be the first to rate the shop.';
+      for(var z=0;z<avgStars.children.length;z++)avgStars.children[z].className='star';return}
+    var sum=0;
+    list.forEach(function(r){
+      sum+=r.rating;
+      var c=document.createElement('article');c.className='rcard glass';
+      var w=document.createElement('div');w.className='who';w.textContent=r.name;
+      var st=document.createElement('div');st.className='rs';st.textContent=new Array(r.rating+1).join('★')+new Array(6-r.rating).join('☆');
+      var p=document.createElement('p');p.textContent=r.text;
+      var d=document.createElement('small');d.textContent=r.date;
+      c.appendChild(w);c.appendChild(st);c.appendChild(p);c.appendChild(d);rlist.appendChild(c);
+    });
+    var avg=sum/list.length;
+    avgEl.textContent=avg.toFixed(1)+' ';
+    var sm=document.createElement('small');sm.textContent='/ 5';avgEl.appendChild(sm);
+    for(var i=0;i<avgStars.children.length;i++)avgStars.children[i].className='star'+(i<Math.round(avg)?' on':'');
+    avgNote.textContent=list.length+(list.length===1?' review':' reviews')+' from buyers.';
+  }
+  function loadReviews(){
+    if(!live||!window.fetch)return;
+    fetch(base+':runQuery?key='+encodeURIComponent(FB.apiKey),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({structuredQuery:{from:[{collectionId:'reviews'}],
+        where:{fieldFilter:{field:{fieldPath:'approved'},op:'EQUAL',value:{booleanValue:true}}},limit:50}})
+    }).then(function(r){return r.json()}).then(function(rows){
+      var out=[];
+      (rows||[]).forEach(function(row){
+        if(!row.document)return;
+        var f=row.document.fields||{};
+        var t=f.createdAt&&f.createdAt.timestampValue?new Date(f.createdAt.timestampValue):null;
+        var n=parseInt(f.rating&&f.rating.integerValue,10);
+        if(!(n>=1&&n<=5))return;
+        out.push({name:(f.name&&f.name.stringValue)||'Buyer',rating:n,text:(f.text&&f.text.stringValue)||'',time:t?t.getTime():0,
+          date:t?t.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}):''});
+      });
+      out.sort(function(a,b){return b.time-a.time});
+      renderReviews(out);
+    }).catch(function(){});
+  }
+  rsend.addEventListener('click',function(){
+    var name=rname.value.trim(),text=rtext.value.trim();
+    if(!rating){say('Pick a star rating first.');return}
+    if(!name){say('Add your name or Roblox username.');return}
+    if(text.length<3){say('Write a short review.');return}
+    if(rweb.value){say('Thanks! Your review will show after the shop approves it.',true);return}
+    if(!live){say('Reviews are not switched on yet. Please try again later.');return}
+    try{var last=+localStorage.getItem('sfm_review_t')||0;if(Date.now()-last<60000){say('Please wait a minute before sending another review.');return}}catch(e){}
+    rsend.disabled=true;say('Sending...');
+    fetch(base+'/reviews?key='+encodeURIComponent(FB.apiKey),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:{
+        name:{stringValue:name.slice(0,40)},rating:{integerValue:String(rating)},text:{stringValue:text.slice(0,400)},
+        approved:{booleanValue:false},createdAt:{timestampValue:new Date().toISOString()}}})
+    }).then(function(r){
+      if(!r.ok)throw new Error('fail');
+      try{localStorage.setItem('sfm_review_t',String(Date.now()))}catch(e){}
+      rating=0;paint();rname.value='';rtext.value='';
+      say('Thanks! Your review will show after the shop approves it.',true);
+    }).catch(function(){say('Could not send your review. Please try again.')}).then(function(){rsend.disabled=false});
+  });
+  /* Install as an app */
+  var installBtn=document.getElementById('install'),iosHint=document.getElementById('iosHint'),deferred=null;
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone;
+  if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){
+    window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+  }
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault();deferred=e;if(!standalone)installBtn.hidden=false;
+  });
+  installBtn.addEventListener('click',function(){
+    if(!deferred)return;
+    deferred.prompt();
+    deferred.userChoice.then(function(){deferred=null;installBtn.hidden=true});
+  });
+  window.addEventListener('appinstalled',function(){installBtn.hidden=true});
+  if(!standalone&&/iphone|ipad|ipod/i.test(navigator.userAgent))iosHint.hidden=false;
+  loadReviews();
+})();
+</script>
+</body>
+</html>
