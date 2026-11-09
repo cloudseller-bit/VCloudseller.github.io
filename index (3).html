@@ -1,0 +1,1737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E0720">
+<meta name="description" content="Roblox cloud AFK farming, Robux and Roblox items. Order on the website.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SAD-A-F MART">
+<meta property="og:description" content="Roblox cloud AFK farming, Robux and Roblox items. Order on the website.">
+<meta property="og:url" content="https://cloudseller-bit.github.io/VCloudseller.github.io/">
+<meta property="og:image" content="https://cloudseller-bit.github.io/VCloudseller.github.io/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SAD-A-F MART">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>SAD-A-F MART</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a night-time garden scene fixed behind frosted-glass panels. Violet gradient is the single bold accent. */
+:root{
+  --bg:#050210;
+  --ink:#F4EFFF;
+  --muted:#BBAEDD;
+  --glass:rgba(34,20,70,.55);
+  --glass-strong:rgba(44,26,90,.72);
+  --field:rgba(10,5,26,.6);
+  --line:rgba(196,168,255,.22);
+  --accent:#A56BFF;
+  --accent-soft:#D6BCFF;
+  --grad:linear-gradient(135deg,#7B3BF0 0%,#B53AD9 100%);
+  --ok:#4ADE80;
+  --font-display:"Sora","Noto Sans Bengali","Segoe UI",system-ui,sans-serif;
+  --font-body:"DM Sans","Noto Sans Bengali",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
+body{
+  margin:0;overflow-x:hidden;
+  background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;
+}
+input,textarea,select,.msg{-webkit-user-select:text;user-select:text}
+.wrap{
+  max-width:980px;margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+
+/* Background scene: animated black hole on a canvas */
+#hole{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block;background:#000;pointer-events:none}
+
+/* Shared surfaces */
+.glass{
+  background:var(--glass);border:1px solid var(--line);border-radius:22px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.label{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-soft)}
+
+/* Top bar */
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:18px}
+.brand{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,4.6vw,26px);letter-spacing:.02em;
+  background:linear-gradient(90deg,#fff,#D9BFFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.open{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;
+  background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.open i{width:8px;height:8px;border-radius:50%;background:var(--ok);display:block;box-shadow:0 0 10px var(--ok)}
+
+/* Hero */
+.hero{padding-block:36px 24px}
+.hero h1{font-weight:800;font-size:clamp(36px,8vw,68px);line-height:1.04;letter-spacing:-.02em;max-width:15ch}
+.hero h1 .g{background:linear-gradient(90deg,#C9A4FF,#F08BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .bn{font-size:clamp(18px,3.4vw,23px);font-weight:500;margin:16px 0 0;color:var(--accent-soft)}
+.hero h1,.hero .bn,.hero p.lead{text-shadow:0 2px 16px rgba(0,0,0,.95),0 0 3px rgba(0,0,0,.8)}
+.hero p.lead{max-width:56ch;margin:12px 0 0;font-size:17px;color:var(--muted)}
+.games{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.games li{padding:6px 14px;border-radius:999px;font-weight:700;font-size:14px;background:var(--glass);border:1px solid var(--line)}
+.games li.more{font-weight:500;color:var(--muted);border-style:dashed}
+.contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.numline{font-size:14px;color:var(--muted);margin:12px 0 0;overflow-wrap:anywhere}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-display);font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;
+  color:#fff;background:var(--grad);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:13px 24px;
+  box-shadow:0 10px 28px rgba(140,60,230,.38);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 14px 34px rgba(160,70,240,.5)}
+.btn.alt{background:var(--glass);border-color:var(--line);box-shadow:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn.alt:hover{border-color:var(--accent);box-shadow:0 10px 26px rgba(120,60,220,.3)}
+.btn:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+
+/* Sections */
+section{padding-block:26px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head h2{font-size:clamp(24px,5vw,34px);font-weight:700;letter-spacing:-.01em}
+
+/* Price cards */
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.tag{
+  position:relative;display:flex;flex-direction:column;min-width:0;padding:20px 18px 22px;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.tag:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 16px 40px rgba(110,50,210,.35)}
+.price{display:flex;align-items:flex-start;gap:5px;margin-top:12px;font-family:var(--font-display);font-weight:800;line-height:1}
+.price b{font-size:clamp(44px,9vw,58px);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price sup{font-size:15px;font-weight:700;margin-top:6px;color:var(--accent-soft)}
+.tag h3{font-size:19px;font-weight:700;margin-top:12px}
+.tag .note{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.tag.best{background:var(--grad);border-color:rgba(255,255,255,.35);box-shadow:0 18px 46px rgba(150,60,230,.5)}
+.tag.best .label,.tag.best .note,.tag.best .price sup{color:#fff}
+.tag.best .note{opacity:.92}
+.flag{position:absolute;top:14px;right:14px;background:#fff;color:#5A1DC2;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+.fine{margin:14px 0 0;color:var(--muted);font-size:14px}
+@media (max-width:600px){.tag.best{grid-column:1/-1}}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;padding:18px;min-width:0}
+.steps li::before{
+  content:counter(s);display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+  background:var(--grad);font-family:var(--font-display);font-weight:800;font-size:15px;margin-bottom:12px;
+}
+.steps strong{display:block;font-family:var(--font-display);font-size:17px;font-weight:700}
+.steps span{color:var(--muted);font-size:15px}
+
+/* Order counter */
+.counter{background:var(--glass-strong);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;border-radius:26px}
+@media (max-width:720px){.counter{grid-template-columns:minmax(0,1fr);padding:18px}}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+label{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft)}
+select,input{
+  font:inherit;color:var(--ink);background:var(--field);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;width:100%;min-width:0;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(165,107,255,.25)}
+select option{background:#1B0F3B;color:#fff}
+input::placeholder{color:#8C7FB3}
+.out{display:flex;flex-direction:column;gap:12px;min-width:0}
+.msg{
+  margin:0;border:1px dashed var(--line);border-radius:14px;padding:14px;background:var(--field);
+  font-family:var(--font-mono);font-size:13.5px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;flex:1;
+}
+.status{min-height:1.4em;font-size:14px;color:var(--ok);margin:0;font-weight:700}
+
+/* Items shop */
+.group{margin-bottom:24px}
+.group h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.items{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:14px;padding:14px 18px;color:var(--ink);text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.item:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 28px rgba(110,50,210,.3)}
+.item:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.item .nm{font-weight:700;min-width:0;overflow-wrap:anywhere}
+.item .nm small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.item .pr{font-family:var(--font-display);font-weight:800;font-size:20px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.item .go{font-size:13px;font-weight:700;color:var(--accent-soft);white-space:nowrap}
+
+/* Reviews */
+.rev{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px}
+@media (max-width:720px){.rev{grid-template-columns:minmax(0,1fr)}}
+.rev>div{padding:22px;min-width:0}
+.score{font-family:var(--font-display);font-weight:800;font-size:48px;line-height:1}
+.score small{font-size:16px;font-weight:600;color:var(--muted)}
+.stars{display:flex;gap:4px;margin:10px 0}
+.star{font-size:30px;line-height:1;background:none;border:0;padding:2px;cursor:pointer;color:#6B5A99;border-radius:8px}
+.star.on{color:#FFC857}
+.star:focus-visible{outline:3px solid var(--accent-soft)}
+textarea{font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:14px;padding:12px 14px;width:100%;min-width:0;min-height:96px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(165,107,255,.25)}
+textarea::placeholder{color:#8C7FB3}
+.empty{margin:0;color:var(--muted);font-size:15px}
+
+.rlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:16px}
+.rcard{padding:18px;min-width:0}
+.rcard .who{font-weight:700;overflow-wrap:anywhere}
+.rcard .rs{color:#FFC857;letter-spacing:2px;font-size:15px}
+.rcard p{margin:8px 0 0;color:var(--muted);overflow-wrap:anywhere}
+.rcard small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+footer{padding-block:34px 52px;margin-top:18px;color:var(--muted);font-size:14px}
+footer .wrap{border-top:1px solid var(--line);padding-top:26px}
+footer .brand{display:inline-block;font-size:20px;margin-bottom:6px}
+footer a{color:var(--accent-soft);font-weight:700}
+
+/* Nav, floating order button, referral, calculator, FAQ */
+.top{position:sticky;top:0;z-index:20;background:rgba(7,3,18,.94);padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--line)}
+.top .wrap{padding-block:12px 8px}
+.nav{display:flex;gap:8px;overflow-x:auto;padding-block:2px 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.top .nav{flex-wrap:nowrap;justify-content:flex-start;align-items:center;padding-block:2px 12px}
+.nav a{flex:none}
+.nav a{white-space:nowrap;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(34,20,70,.7);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600}
+.nav a:hover,.nav a:focus-visible{border-color:var(--accent);outline:none}
+h2[id]{scroll-margin-top:120px}
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;
+  display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;text-decoration:none;
+  font-family:var(--font-display);font-weight:700;font-size:15px;color:#fff;background:var(--grad);
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 10px 30px rgba(120,50,220,.55)}
+.fab:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.banner{margin:0 0 16px;padding:14px 18px;border-radius:16px;font-weight:600}
+.banner b{color:var(--accent-soft)}
+.ref{align-items:start}
+.rew{margin:0 0 16px;padding:0;list-style:none;display:grid;gap:8px}
+.rew li{padding:12px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line);color:var(--muted);font-size:15px}
+.rew b{display:block;color:var(--ink);font-family:var(--font-display);font-size:17px;margin-top:2px}
+.calc{margin-top:12px;padding:18px;display:grid;gap:12px}
+.calcrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.calcrow input{flex:1 1 150px;max-width:220px}
+.calcout{font-family:var(--font-display);font-weight:700;font-size:19px;overflow-wrap:anywhere;min-width:0}
+.faq{display:grid;gap:10px}
+.faq details{padding:0}
+.faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-family:var(--font-display);font-weight:600;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;line-height:1;color:var(--accent-soft);flex:none}
+.faq details[open] summary::after{content:"\2212"}
+.faq summary:focus-visible{outline:3px solid var(--accent-soft);outline-offset:-3px;border-radius:22px}
+.faq p{margin:0;padding:0 18px 18px;color:var(--muted)}
+footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+
+/* Cart, language, announcement, toast, why-us */
+.hdr-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lang{font:inherit;font-weight:700;font-size:13px;color:var(--ink);background:rgba(34,20,70,.7);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer}
+.lang:hover,.lang:focus-visible{border-color:var(--accent);outline:none}
+html[lang="bn"] .bn{display:none}
+.nav a.on{background:var(--grad);border-color:transparent;color:#fff}
+.announce{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 16px;background:var(--grad);color:#fff;font-weight:600;font-size:14px;text-align:center}
+.announce button{font:inherit;color:#fff;background:none;border:0;cursor:pointer;font-size:20px;line-height:1;padding:0 4px}
+.add{cursor:pointer}
+.tag .add{margin-top:auto;align-self:flex-start}
+.tag .note{margin-bottom:16px}
+.tag.best .add{background:#fff;color:#5A1DC2;box-shadow:none}
+.item .btn{padding:9px 16px;font-size:14px}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.why>div{padding:18px;min-width:0}
+.why h3{font-size:17px;font-weight:700}
+.why p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.fabs{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;pointer-events:none}
+.fabs>*{pointer-events:auto}
+.fabs .fab{position:static;margin-left:auto}
+.cartfab{cursor:pointer;font-size:15px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:60;background:#fff;color:#2A0F5A;font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.45);max-width:calc(100% - 32px);text-align:center}
+.sheet{position:fixed;inset:0;z-index:50}
+.sheet-bg{position:absolute;inset:0;background:rgba(3,1,10,.72)}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;margin-inline:auto;max-width:560px;max-height:90%;overflow-y:auto;overscroll-behavior:contain;
+  border-radius:22px 22px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom,0px));background:#150A30;border:1px solid var(--line)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.sheet-head h2{font-size:22px}
+.x{font:inherit;font-size:26px;line-height:1;color:var(--ink);background:none;border:0;cursor:pointer;padding:4px 8px}
+.x:focus-visible{outline:3px solid var(--accent-soft);border-radius:8px}
+.clist{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.clist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line)}
+.clist .cn{font-weight:700;overflow-wrap:anywhere;min-width:0}
+.clist .ct{font-family:var(--font-display);font-weight:800;white-space:nowrap;text-align:right}
+.qty{display:inline-flex;align-items:center;gap:8px}
+.qty button{font:inherit;font-weight:800;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:rgba(34,20,70,.8);color:var(--ink);cursor:pointer}
+.qty span{min-width:2.4ch;text-align:center;font-variant-numeric:tabular-nums}
+.clist .rm{font:inherit;background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline;font-size:13px;justify-self:end}
+.ctotal{display:flex;justify-content:space-between;align-items:baseline;padding:12px 4px;font-family:var(--font-display);font-size:18px}
+.ctotal b{font-size:26px;font-weight:800}
+.crow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.crow .btn{flex:1 1 140px}
+#cartSend{width:100%}
+
+/* Wallet */
+.wal{padding:20px;display:grid;gap:12px}
+.wal .chips{margin:0}
+.wbal,.wdep,.whist{padding:20px;margin-top:14px}
+.whi{margin:0}
+.whi b{font-family:var(--font-display);font-size:18px;overflow-wrap:anywhere}
+.bal{font-family:var(--font-display);font-weight:800;font-size:46px;line-height:1.1;margin:6px 0 2px}
+.bal small{font-size:18px;font-weight:700;color:var(--accent-soft)}
+.dinst{margin:0 0 12px;padding:12px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line);color:var(--muted);overflow-wrap:anywhere}
+.dinst b{color:var(--ink)}
+
+/* Extra features */
+@media (max-width:480px){
+  .top .wrap{flex-wrap:nowrap;padding-block:10px 6px}
+  .top .brand{font-size:18px;white-space:nowrap}
+  .hdr-r{flex-wrap:nowrap;gap:6px}
+  .open{padding:5px 10px;font-size:12px;white-space:nowrap}
+  .lang{padding:5px 11px;font-size:12px}
+  .nav{padding-block:2px 10px}
+}
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#2A0F5A;padding:10px 16px;border-radius:999px;font-weight:700;text-decoration:none}
+.skip:focus{left:16px}
+.prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;z-index:45;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.offline{padding:7px 16px;text-align:center;font-size:14px;font-weight:600;background:#3A1030;color:#FFD0E8}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.chip{font:inherit;font-weight:600;font-size:14px;color:var(--ink);background:rgba(34,20,70,.7);border:1px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer}
+.chip.on{background:var(--grad);border-color:transparent;color:#fff}
+.chip:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.timer{margin-top:18px;padding:18px;display:grid;gap:10px}
+.timer h3{font-size:18px}
+.timer select{max-width:260px}
+.tout{margin:0;font-family:var(--font-display);font-weight:700;font-size:18px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.cgrid>div{padding:18px;min-width:0;display:flex;flex-direction:column}
+.cgrid h3{font-size:18px}
+.cnum{font-family:var(--font-mono);font-size:14px;color:var(--muted);margin:6px 0 14px;overflow-wrap:anywhere}
+.cgrid .crow{margin-top:auto}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;width:44px;height:44px;border-radius:50%;
+  font:inherit;font-size:20px;color:#fff;background:rgba(40,22,86,.92);border:1px solid var(--line);cursor:pointer}
+.totop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.hh{font-size:15px;margin:18px 0 8px}
+.planline{margin:0 0 12px;font-family:var(--font-display);font-weight:800;font-size:20px}
+.chatp{display:flex;flex-direction:column}
+.chatlog{display:flex;flex-direction:column;gap:8px;min-height:180px;max-height:46vh;overflow-y:auto;overscroll-behavior:contain;padding:10px;border-radius:14px;background:var(--field);border:1px solid var(--line);margin-bottom:10px}
+.cm{max-width:82%;padding:9px 12px;border-radius:14px;font-size:15px;line-height:1.4;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text}
+.cm small{display:block;font-size:11px;opacity:.7;margin-top:3px}
+.cm.me{align-self:flex-end;background:var(--grad);color:#fff;border-bottom-right-radius:4px}
+.cm.them{align-self:flex-start;background:rgba(60,38,120,.8);border:1px solid var(--line);border-bottom-left-radius:4px}
+.chatsend{display:flex;gap:8px}.chatsend input{flex:1;min-width:0}.chatsend .btn{width:auto;padding-inline:20px}
+.ol li{grid-template-columns:minmax(0,1fr) auto}
+.ol .hs b{color:var(--ink)}
+.ol .nw{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:#fbbf24;color:#1a0f33;font-size:11px;font-weight:800}
+.hl{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.hl li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--field);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+.hl .hs{overflow-wrap:anywhere;min-width:0}
+.hl button{font:inherit;font-size:13px;font-weight:700;color:var(--ink);background:rgba(34,20,70,.9);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;grid-row:span 2}
+
+@media (max-width:760px),(pointer:coarse){
+  .glass,.open,.btn.alt{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .glass{background:rgba(24,12,54,.86)}
+  .open{background:rgba(24,12,54,.86)}
+  .btn.alt{background:rgba(24,12,54,.86)}
+  .counter.glass{background:rgba(30,16,68,.92)}
+}
+@media (hover:none){
+  .tag:hover,.item:hover,.btn:hover{transform:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .7s ease both}
+  .rise.d1{animation-delay:.08s}
+  .rise.d2{animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tw{animation:none}
+  .tag,.btn{transition:none}
+}
+</style>
+
+</head>
+<body>
+<canvas id="hole" aria-hidden="true"></canvas>
+
+<a class="skip" href="#prices">Skip to prices</a>
+<div class="prog" id="prog" aria-hidden="true"></div>
+<header class="top">
+  <div class="offline" id="offline" hidden>You are offline. Prices may be out of date.</div>
+  <div class="announce" id="announce" hidden><span id="annText"></span><button id="annClose" type="button" aria-label="Close">×</button></div>
+  <div class="wrap">
+    <span class="brand">SAD-A-F MART</span>
+    <span class="hdr-r"><span class="open"><i></i>Taking orders</span><button class="lang" id="langBtn" type="button">বাংলা</button></span>
+  </div>
+  <nav class="nav wrap" aria-label="Sections">
+    <a href="#prices">Prices</a>
+    <a href="#items">Items</a>
+    <a href="#order">Order</a>
+    <a href="#wallet" id="navWallet">Wallet</a>
+    <a href="#refer">Refer a friend</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1 class="rise">Your farm keeps <span class="g">running</span> while you sleep.</h1>
+    <p class="bn rise d1">আপনি ঘুমান, ফার্ম চলতে থাকুক।</p>
+    <p class="lead rise d1">Cloud AFK farming for Roblox. Pick a time slot, send your username, and your game keeps farming on our cloud instead of your phone or PC.</p>
+    <ul class="games rise d2" aria-label="Supported games">
+      <li>Steal an Egg</li>
+      <li>Grow a Garden</li>
+      <li class="more">and other games</li>
+    </ul>
+    <div class="contact rise d2">
+      <a class="btn" href="https://wa.me/8801708763962" target="_blank" rel="noopener">WhatsApp support</a>
+      <a class="btn alt" href="https://www.facebook.com/normalkid009" target="_blank" rel="noopener">Facebook page</a>
+      <button class="btn alt" id="install" type="button" hidden>Install app</button>
+    </div>
+    <p class="numline" id="iosHint" hidden>To install on iPhone: tap the Share button in Safari, then Add to Home Screen.</p>
+    <p class="numline">WhatsApp: +8801708763962</p>
+  </div>
+
+  <section aria-labelledby="why">
+    <div class="sec-head">
+      <h2 id="why">Why SAD-A-F MART</h2>
+    </div>
+    <div class="why">
+      <div class="glass"><h3>No phone or PC needed</h3><p>Your game keeps farming on our cloud while your devices rest.</p></div>
+      <div class="glass"><h3>Clear prices in TK</h3><p>Every plan and item has its price right on the page.</p></div>
+      <div class="glass"><h3>Order on the website</h3><p>Pay with your wallet and chat with the shop about your order.</p></div>
+      <div class="glass"><h3>Refer and save</h3><p>Share your link and earn rewards.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="prices">
+    <div class="sec-head">
+      <h2 id="prices">AFK farming prices</h2>
+      <span class="label">Cloud farming</span>
+    </div>
+    <div class="shelf">
+      <article class="tag glass" data-id="p12" data-name="12 hours AFK farming" data-price="40">
+        <span class="label">12 hours</span>
+        <div class="price"><b>40</b><sup>TK</sup></div>
+        <h3>Overnight</h3>
+        <p class="note">One night of farming.</p>
+        <button class="btn add" type="button">Add to cart</button>
+      </article>
+      <article class="tag glass" data-id="p24" data-name="24 hours AFK farming" data-price="70">
+        <span class="label">24 hours</span>
+        <div class="price"><b>70</b><sup>TK</sup></div>
+        <h3>Full day</h3>
+        <p class="note">A full day and night.</p>
+        <button class="btn add" type="button">Add to cart</button>
+      </article>
+      <article class="tag glass" data-id="p48" data-name="48 hours AFK farming" data-price="100">
+        <span class="label">48 hours</span>
+        <div class="price"><b>100</b><sup>TK</sup></div>
+        <h3>Weekend</h3>
+        <p class="note">50 TK per day.</p>
+        <button class="btn add" type="button">Add to cart</button>
+      </article>
+      <article class="tag glass" data-id="p7" data-name="7 days AFK farming" data-price="240">
+        <span class="label">7 days</span>
+        <div class="price"><b>240</b><sup>TK</sup></div>
+        <h3>Weekly</h3>
+        <p class="note">About 34 TK per day.</p>
+        <button class="btn add" type="button">Add to cart</button>
+      </article>
+      <article class="tag glass best" data-id="p30" data-name="30 days AFK farming" data-price="640">
+        <span class="flag">Best value</span>
+        <span class="label">30 days</span>
+        <div class="price"><b>640</b><sup>TK</sup></div>
+        <h3>Monthly</h3>
+        <p class="note">About 21 TK per day.</p>
+        <button class="btn add" type="button">Add to cart</button>
+      </article>
+    </div>
+    <p class="fine">All prices are in Bangladeshi Taka (TK).</p>
+    <div class="timer glass">
+      <h3>Farm timer</h3>
+      <p class="fine" style="margin:0">Pick a plan to see when your farm would end if you start now.</p>
+      <select id="tplan" aria-label="Plan length">
+        <option value="12">12 hours</option>
+        <option value="24" selected>24 hours</option>
+        <option value="48">48 hours</option>
+        <option value="168">7 days</option>
+        <option value="720">30 days</option>
+      </select>
+      <p class="tout" id="tout" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="items">
+    <div class="sec-head">
+      <h2 id="items">Roblox items</h2>
+      <span class="label">Add items to your cart</span>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Item types">
+      <button class="chip on" type="button" data-cat="all">All</button>
+      <button class="chip" type="button" data-cat="robux">Robux</button>
+      <button class="chip" type="button" data-cat="pets">Pets</button>
+      <button class="chip" type="button" data-cat="dice">Anime Dice</button>
+    </div>
+
+    <div class="group" data-cat="robux">
+      <h3>Robux</h3>
+      <div class="calc glass">
+        <label for="rbx">Robux calculator</label>
+        <div class="calcrow">
+          <input id="rbx" type="number" inputmode="numeric" min="1" max="100000" placeholder="How many Robux?">
+          <span class="calcout" id="rbxOut" aria-live="polite">Enter an amount</span>
+        </div>
+        <p class="fine" style="margin:0">1 TK per Robux.</p>
+        <button class="btn" id="rbxAdd" type="button" hidden>Add to cart</button>
+      </div>
+    </div>
+
+    <div class="group" data-cat="pets">
+      <h3>Grow a Garden pets</h3>
+      <div class="items">
+        <div class="item glass" data-id="mimic" data-name="Mimic (Grow a Garden pet)" data-price="20">
+          <span class="nm">Mimic</span><span class="pr">20 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+        <div class="item glass" data-id="spider" data-name="Ghostly Spider (Grow a Garden pet)" data-price="800">
+          <span class="nm">Ghostly Spider</span><span class="pr">800 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+        <div class="item glass" data-id="tokens" data-name="1,000 tokens" data-price="170">
+          <span class="nm">Tokens<small>1,000 tokens</small></span><span class="pr">170 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="group" data-cat="dice">
+      <h3>Anime Dice</h3>
+      <div class="items">
+        <div class="item glass" data-id="dice1" data-name="Anime Dice 1 OC" data-price="4">
+          <span class="nm">1 OC</span><span class="pr">4 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+        <div class="item glass" data-id="dice10" data-name="Anime Dice 10 OC" data-price="10">
+          <span class="nm">10 OC</span><span class="pr">10 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+        <div class="item glass" data-id="dice40" data-name="Anime Dice 40 OC" data-price="20">
+          <span class="nm">40 OC</span><span class="pr">20 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+        <div class="item glass" data-id="dice100" data-name="Anime Dice 100 OC" data-price="40">
+          <span class="nm">100 OC</span><span class="pr">40 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+        <div class="item glass" data-id="spin" data-name="Anime Dice jackpot spin" data-price="10">
+          <span class="nm">Jackpot spins<small>Price per spin</small></span><span class="pr">10 TK</span><button class="btn add" type="button">Add</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how">
+    <div class="sec-head">
+      <h2 id="how">How an order works</h2>
+    </div>
+    <ol class="steps">
+      <li class="glass"><strong>Pick a plan</strong><span>Choose the hours and the game.</span></li>
+      <li class="glass"><strong>Pay with your wallet</strong><span>Add items to your cart and place the order with your balance.</span></li>
+      <li class="glass"><strong>Chat and receive</strong><span>The shop chats with you in your order chat, then gives you the item or starts your farm.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="order">
+    <div class="sec-head">
+      <h2 id="order">Order counter</h2>
+      <span class="label">Pick your plan</span>
+    </div>
+    <div class="counter glass">
+      <form id="orderForm" novalidate>
+        <div class="field">
+          <label for="plan">Plan</label>
+          <select id="plan">
+            <option value="12 hours|40 TK">12 hours · 40 TK</option>
+            <option value="24 hours|70 TK" selected>24 hours · 70 TK</option>
+            <option value="48 hours|100 TK">48 hours · 100 TK</option>
+            <option value="7 days|240 TK">7 days · 240 TK</option>
+            <option value="30 days|640 TK">30 days · 640 TK</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="game">Game</label>
+          <select id="game">
+            <option>Grow a Garden</option>
+            <option>Steal an Egg</option>
+            <option>Another game</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="user">Roblox username</label>
+          <input id="user" type="text" autocomplete="off" placeholder="Your Roblox username" maxlength="40">
+        </div>
+        <div class="field">
+          <label for="refin">Referral code (optional)</label>
+          <input id="refin" type="text" autocomplete="off" placeholder="Who invited you?" maxlength="20">
+        </div>
+      </form>
+      <div class="out">
+        <label>Your plan</label>
+        <p class="planline" id="planLine"></p>
+        <button class="btn" id="planAdd" type="button">Add to cart</button>
+        <a class="btn alt" href="https://wa.me/8801708763962" target="_blank" rel="noopener">Ask a question on WhatsApp</a>
+        <p class="status" id="status" role="status"></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="wallet">
+    <div class="sec-head">
+      <h2 id="wallet">Wallet</h2>
+      <span class="label">Deposit and pay with balance</span>
+    </div>
+    <div class="wal glass" id="walOut">
+      <div class="chips" role="group" aria-label="Account">
+        <button class="chip on" id="tabIn" type="button">Log in</button>
+        <button class="chip" id="tabUp" type="button">Create account</button>
+      </div>
+      <div class="field">
+        <label for="wuser">Username</label>
+        <input id="wuser" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20" placeholder="e.g. siam_01">
+      </div>
+      <div class="field">
+        <label for="wpass">Password</label>
+        <input id="wpass" type="password" autocomplete="current-password" maxlength="64" placeholder="At least 6 characters">
+      </div>
+      <button class="btn" id="wgo" type="button">Log in</button>
+      <p class="status" id="wmsg" role="status"></p>
+      <p class="fine" style="margin:0">Usernames use letters, numbers and underscores. Keep your password safe, there is no password reset.</p>
+    </div>
+    <div id="walIn" hidden>
+      <div class="wbal glass">
+        <p class="whi"><span class="label">Hi,</span> <b id="wname"></b></p>
+        <div class="bal"><span id="wbal">0</span> <small>TK</small></div>
+        <p class="fine" id="wavail" style="margin:0 0 12px"></p>
+        <div class="crow"><button class="btn" id="wdepBtn" type="button">Deposit</button><button class="btn alt" id="wrefresh" type="button">Refresh</button><button class="btn alt" id="wlogout" type="button">Log out</button></div>
+      </div>
+      <div class="wdep glass" id="wdep" hidden>
+        <h3 style="font-size:19px;margin-bottom:12px">Deposit money</h3>
+        <p class="dinst" id="dnone" hidden>Deposits are not open yet. The shop has not added a payment number.</p>
+        <div id="dform">
+          <div class="field">
+            <label for="damt">Amount (TK)</label>
+            <input id="damt" type="number" inputmode="numeric" min="1" max="50000" placeholder="100">
+          </div>
+          <div class="field">
+            <label for="dmeth">Payment method</label>
+            <select id="dmeth"></select>
+          </div>
+          <p class="dinst" id="dinst"></p>
+          <div class="field">
+            <label for="dtrx">Transaction ID</label>
+            <input id="dtrx" type="text" autocomplete="off" autocapitalize="characters" maxlength="30" placeholder="From your payment message">
+          </div>
+          <button class="btn" id="dsend" type="button">Submit deposit</button>
+        </div>
+        <p class="status" id="dmsg" role="status"></p>
+        
+      </div>
+      <div class="whist glass" id="myOrders">
+        <h3 style="font-size:19px;margin-bottom:10px">My orders</h3>
+        <div class="chips" role="group" aria-label="Orders"><button class="chip on" id="oActive" type="button">Active</button><button class="chip" id="oDone" type="button">Completed</button></div>
+        <ul class="hl ol" id="oList"></ul>
+      </div>
+      <div class="whist glass">
+        <h3 style="font-size:19px;margin-bottom:10px">Recent activity</h3>
+        <ul class="hl" id="wact"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="refer">
+    <div class="sec-head">
+      <h2 id="refer">Refer a friend</h2>
+      <span class="label">Share and earn</span>
+    </div>
+    <p class="banner glass" id="refBanner" hidden></p>
+    <div class="counter glass ref">
+      <div>
+        <ul class="rew">
+          <li>Your friend gets<b id="rewFriend"></b></li>
+          <li>You get<b id="rewYou"></b></li>
+        </ul>
+        <div class="field">
+          <label for="refName">Your name or Roblox username</label>
+          <input id="refName" type="text" autocomplete="off" maxlength="20" placeholder="Type your name">
+        </div>
+        <p class="fine" style="margin:0">Letters, numbers and underscores only. The shop checks every referral on WhatsApp before giving a reward.</p>
+      </div>
+      <div class="out">
+        <label>Your referral link</label>
+        <pre class="msg" id="refLink">Type your name to get your link.</pre>
+        <button class="btn" id="refCopy" type="button" disabled>Copy link</button>
+        <a class="btn alt" id="refWa" href="https://wa.me/" target="_blank" rel="noopener" hidden>Share on WhatsApp</a>
+        <p class="status" id="refStatus" role="status"></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="reviews">
+    <div class="sec-head">
+      <h2 id="reviews">Ratings and reviews</h2>
+      <span class="label">From real buyers</span>
+    </div>
+    <div class="rev">
+      <div class="glass">
+        <div class="score" id="avg">New <small>shop</small></div>
+        <div class="stars" id="avgStars" aria-hidden="true"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="empty" id="avgNote">No ratings yet. Be the first to rate the shop.</p>
+      </div>
+      <div class="glass">
+        <h3 style="font-size:19px;margin-bottom:12px">Rate your order</h3>
+        <label id="rateLabel">Your rating</label>
+        <div class="stars" id="stars" role="radiogroup" aria-labelledby="rateLabel"></div>
+        <div class="field">
+          <label for="rname">Your name or Roblox username</label>
+          <input id="rname" type="text" autocomplete="off" maxlength="40" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="rtext">Your review</label>
+          <textarea id="rtext" maxlength="400" placeholder="How was your order?"></textarea>
+        </div>
+        <input class="hp" id="rweb" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" id="rsend" type="button">Submit review</button>
+        <p class="status" id="rstatus" role="status"></p>
+      </div>
+    </div>
+    <div class="rlist" id="rlist"></div>
+  </section>
+  <section aria-labelledby="faq">
+    <div class="sec-head">
+      <h2 id="faq">Questions</h2>
+      <span class="label">Quick answers</span>
+    </div>
+    <div class="faq">
+      <details class="glass"><summary>How do I order?</summary><p>Create an account, deposit money in the Wallet section, add a plan or an item to your cart and tap Place order. Then open your order chat. The shop will talk to you there and give you the item.</p></details>
+      <details class="glass"><summary>Which games can you farm?</summary><p>Steal an Egg, Grow a Garden and other games. Ask us on WhatsApp if your game is not listed.</p></details>
+      <details class="glass"><summary>What does cloud AFK farming mean?</summary><p>Your game keeps farming on our cloud for the time you choose, so it does not use your phone or PC.</p></details>
+      <details class="glass"><summary>How do referrals work?</summary><p>Type your name in the Refer a friend section to get your link. When a friend opens it and orders, their order shows your name. The shop checks it and gives you both the reward.</p></details>
+      <details class="glass"><summary>How do I leave a review?</summary><p>Use the Ratings and reviews section. Pick your stars and write a short review. The shop approves it before it shows on the site.</p></details>
+      <details class="glass"><summary>How do I install the app?</summary><p>On Android, tap Install app at the top of the page or use your browser menu. On iPhone, tap Share in Safari, then Add to Home Screen.</p></details>
+    </div>
+  </section>
+  <section aria-labelledby="contact">
+    <div class="sec-head">
+      <h2 id="contact">Contact us</h2>
+      <span class="label">Reach the shop</span>
+    </div>
+    <div class="cgrid">
+      <div class="glass">
+        <h3>WhatsApp</h3>
+        <p class="cnum">+8801708763962</p>
+        <div class="crow"><a class="btn" href="https://wa.me/8801708763962" target="_blank" rel="noopener">Open WhatsApp</a><button class="btn alt" id="copyNum" type="button">Copy number</button></div>
+      </div>
+      <div class="glass">
+        <h3>Facebook</h3>
+        <p class="cnum">facebook.com/normalkid009</p>
+        <div class="crow"><a class="btn" href="https://www.facebook.com/normalkid009" target="_blank" rel="noopener">Open Facebook</a></div>
+      </div>
+      <div class="glass">
+        <h3>Tell your friends</h3>
+        <p class="cnum" style="font-family:var(--font-body)">Send this shop to a friend.</p>
+        <div class="crow"><button class="btn" id="shareSite" type="button">Share this shop</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="fabs">
+  <button class="fab cartfab" id="cartFab" type="button" hidden>Cart</button>
+  <a class="fab" href="https://wa.me/8801708763962" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<div class="sheet" id="cart" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+  <div class="sheet-bg" id="cartBg"></div>
+  <div class="sheet-panel">
+    <div class="sheet-head"><h2 id="cartTitle">Your cart</h2><button class="x" id="cartClose" type="button" aria-label="Close">×</button></div>
+    <p class="empty" id="cartEmpty">Your cart is empty. Add a plan or an item.</p>
+    <ul class="clist" id="cartList"></ul>
+    <div class="ctotal"><span>Total</span><b id="cartTotal">0 TK</b></div>
+    <div class="field">
+      <label for="cgame">Game (for farming plans)</label>
+      <select id="cgame"><option>Grow a Garden</option><option>Steal an Egg</option><option>Another game</option></select>
+    </div>
+    <div class="field">
+      <label for="cuser">Roblox username</label>
+      <input id="cuser" type="text" autocomplete="off" maxlength="40" placeholder="Your Roblox username">
+    </div>
+    <div class="field">
+      <label for="cref">Referral code (optional)</label>
+      <input id="cref" type="text" autocomplete="off" maxlength="20" placeholder="Who invited you?">
+    </div>
+    <div class="field">
+      <label for="cnote">Note (optional)</label>
+      <input id="cnote" type="text" autocomplete="off" maxlength="120" placeholder="Anything we should know?">
+    </div>
+    <button class="btn" id="cartPlace" type="button" style="width:100%">Place order</button>
+        <p class="fine" id="cartPayNote" hidden></p>
+    <button class="btn alt" id="cartChat" type="button" hidden style="width:100%;margin-top:10px">Open order chat</button>
+    <div class="crow"><button class="btn alt" id="cartClear" type="button">Clear cart</button></div>
+    <p class="status" id="cartStatus" role="status"></p>
+    <div id="hist" hidden><h3 class="hh">Order again</h3><ul class="hl" id="histList"></ul></div>
+  </div>
+</div>
+<div class="sheet" id="chat" role="dialog" aria-modal="true" aria-labelledby="chatTitle" hidden>
+  <div class="sheet-bg" id="chatBg"></div>
+  <div class="sheet-panel chatp">
+    <div class="sheet-head"><h2 id="chatTitle">Order chat</h2><button class="x" id="chatClose" type="button" aria-label="Close">×</button></div>
+    <p class="fine" id="chatInfo" style="margin:0 0 10px"></p>
+    <div class="chatlog" id="chatLog" aria-live="polite"></div>
+    <div class="chatsend"><input id="chatIn" type="text" maxlength="500" autocomplete="off" placeholder="Write a message"><button class="btn" id="chatGo" type="button">Send</button></div>
+    <p class="status" id="chatMsg" role="status"></p>
+  </div>
+</div>
+<button class="totop" id="toTop" type="button" aria-label="Back to top" hidden>↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+
+<footer>
+  <div class="wrap">
+    <span class="brand">SAD-A-F MART</span><br>
+    Roblox items and cloud AFK farming. Support on <a href="https://wa.me/8801708763962" target="_blank" rel="noopener">WhatsApp +8801708763962</a> or <a href="https://www.facebook.com/normalkid009" target="_blank" rel="noopener">Facebook</a>.
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Black hole background */
+  (function(){
+    var cv=document.getElementById('hole'),ctx=cv.getContext('2d');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W=0,H=0,dpr=1,R=0,CX=0,CY=0,glow=null,stars=[],parts=[],last=0,small=false,lastW=0,TAU=Math.PI*2;
+    var pal=['#FFF6EA','#FFE2B8','#FFC98A','#FFAA66','#F08A5A','#D87A8A','#B86BB8','#9A5CC8','#7D4CC0','#6540A8','#523590','#443078'];
+    var STOPS=[[0,255,248,235],[.25,255,214,150],[.5,255,150,70],[.75,190,70,170],[1,80,35,160]];
+    function rnd(a,b){return a+Math.random()*(b-a)}
+    function mix(a,b,t){return a+(b-a)*t}
+    var hc=[0,0,0];
+    function heat(k){
+      if(k<0)k=0;if(k>1)k=1;
+      for(var i=1;i<STOPS.length;i++){
+        if(k<=STOPS[i][0]){
+          var a=STOPS[i-1],b=STOPS[i],f=(k-a[0])/(b[0]-a[0]);
+          hc[0]=mix(a[1],b[1],f);hc[1]=mix(a[2],b[2],f);hc[2]=mix(a[3],b[3],f);return;
+        }
+      }
+      hc[0]=80;hc[1]=35;hc[2]=160;
+    }
+    /* Draws a lensed black hole once: black shadow, thin photon ring, a flat glowing disk and the light bent over and under the hole. */
+    function makeGlow(){
+      var qs=small?.8:.6,Wc=Math.ceil(R*9*qs),Hc=Math.ceil(R*5.4*qs);
+      glow=document.createElement('canvas');glow.width=Wc;glow.height=Hc;glow.cssW=Wc/qs;glow.cssH=Hc/qs;
+      var g=glow.getContext('2d'),img=g.createImageData(Wc,Hc),d=img.data,u=R*qs,cx=Wc/2,cy=Hc/2;
+      var ar=0,ag=0,ab=0;
+      function add(I,k){if(I<.002)return;heat(k);ar+=I*hc[0];ag+=I*hc[1];ab+=I*hc[2]}
+      for(var py=0;py<Hc;py++){
+        var y=(py-cy)/u;
+        for(var px=0;px<Wc;px++){
+          var x=(px-cx)/u,rho=Math.sqrt(x*x+y*y),ax=x<0?-x:x,dopp=1-.55*(x/(rho+.001)),w,s,h,e;
+          ar=0;ag=0;ab=0;
+          add(1.3*Math.exp(-Math.pow((rho-1.012)/.02,2)),.05);
+          if(rho>1){
+            add(.06*Math.exp(-(rho-1)/1.2),.85);
+            if(y<0){s=-y/rho;w=s/.5;w=w>1?1:w;w=w*w*(3-2*w);add(dopp*(2.6*Math.exp(-(rho-1)/.2)+.5*Math.exp(-(rho-1)/.7))*w,.08+Math.min(.55,(rho-1)*.9))}
+            else{s=y/rho;w=s/.5;w=w>1?1:w;w=w*w*(3-2*w);add(dopp*1.2*Math.exp(-(rho-1)/.09)*w,.12)}
+            if(ax>1){
+              h=.05+.035*ax;e=Math.exp(-(y*y)/(h*h));
+              if(e>.002){
+                var edge=ax>3?Math.max(0,1-(ax-3)/1.5):1,inner=Math.min(1,(ax-1)/.2);
+                add(dopp*3.8*e*Math.pow(ax,-1.2)*edge*inner,Math.min(1,(ax-1)/2.6));
+              }
+            }
+          }
+          if(ax<1.06){
+            var yf=.15*Math.sqrt(Math.max(0,1-ax*ax)),dy=y-yf;
+            e=Math.exp(-(dy*dy)/(.05*.05));
+            add(dopp*3.4*e*(ax<1?1:Math.max(0,1-(ax-1)/.06)),.05+ax*.25);
+          }
+          var cR=255*(1-Math.exp(-ar/255)),cG=255*(1-Math.exp(-ag/255)),cB=255*(1-Math.exp(-ab/255));
+          var m=cR>cG?cR:cG;if(cB>m)m=cB;
+          var o=(py*Wc+px)*4;
+          if(rho<1){d[o]=cR;d[o+1]=cG;d[o+2]=cB;d[o+3]=255}
+          else if(m>1){var a=m/255;d[o]=cR/a;d[o+1]=cG/a;d[o+2]=cB/a;d[o+3]=255*a}
+        }
+      }
+      g.putImageData(img,0,0);
+    }
+    function seed(){
+      var n=small?50:90,m=small?70:150,i;
+      parts=[];stars=[];
+      for(i=0;i<n;i++)parts.push({a:rnd(0,TAU),r:rnd(R*1.5,R*3.6),s:rnd(.7,1.6)});
+      for(i=0;i<m;i++)stars.push({x:Math.random(),y:Math.random(),r:rnd(.4,1.3),p:rnd(0,TAU)});
+    }
+    function resize(){
+      var w=window.innerWidth;
+      if(w===lastW&&glow)return;
+      lastW=w;W=w;H=window.innerHeight;small=W<760;
+      dpr=Math.min(window.devicePixelRatio||1,small?1.5:2);
+      cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+      R=Math.min(W,H)*(small?.24:.27);
+      CX=W*(small?.5:.68);CY=H*(small?.3:.42);
+      makeGlow();seed();
+    }
+    function drawParts(front,off){
+      for(var i=0;i<parts.length;i++){
+        var p=parts[i],sn=Math.sin(p.a);
+        if((sn>=0)!==front)continue;
+        var k=Math.min(1,Math.max(0,(p.r-R)/(R*3.2)));
+        ctx.fillStyle=pal[Math.min(11,(k*11)|0)];
+        var z=p.s*(1.4-k*.6);
+        ctx.fillRect(CX+Math.cos(p.a)*p.r,CY+off+sn*p.r*.045,z,z);
+      }
+    }
+    function step(dt){
+      for(var i=0;i<parts.length;i++){
+        var p=parts[i],q=R*2.4/p.r;
+        p.a+=dt*.1*q*q;
+        p.r-=dt*R*.012*q;
+        if(p.r<R*1.4){p.r=rnd(R*3.2,R*3.8);p.a=rnd(0,TAU)}
+      }
+    }
+    function frame(t){
+      var dt=Math.min(.05,(t-last)/1000)||.016;last=t;
+      var off=-Math.min(window.pageYOffset||0,1400)*.07;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.globalAlpha=1;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='#fff';
+      for(var i=0;i<stars.length;i++){
+        var s=stars[i];
+        ctx.globalAlpha=reduce?.6:.3+.35*Math.sin(t/1500+s.p);
+        ctx.fillRect(s.x*W,s.y*H,s.r,s.r);
+      }
+      ctx.globalAlpha=.6;
+      drawParts(false,off);
+      ctx.globalAlpha=reduce?1:.95+.05*Math.sin(t/3500);
+      ctx.drawImage(glow,CX-glow.cssW/2,CY+off-glow.cssH/2,glow.cssW,glow.cssH);
+      ctx.globalAlpha=.6;
+      drawParts(true,off);
+      ctx.globalAlpha=1;
+      ctx.fillStyle=small?'rgba(0,0,0,.32)':'rgba(0,0,0,.18)';ctx.fillRect(0,0,W,H);
+      if(!reduce){step(dt);requestAnimationFrame(frame)}
+    }
+    resize();
+    window.addEventListener('resize',function(){resize();if(reduce)frame(0)});
+    requestAnimationFrame(frame);
+  })();
+
+  /* Referrals and Robux calculator (shop owner: change the rewards and the Robux price here) */
+  var REWARD_FRIEND='5 TK off your first order',REWARD_YOU='10 TK credit for every friend who orders';
+  var RBX_RATE=1;
+  var refin=document.getElementById('refin'),refCode='';
+  function slug(v){return String(v||'').toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,20)}
+  try{
+    var q=new URLSearchParams(location.search).get('ref');
+    if(q){refCode=slug(q);if(refCode)localStorage.setItem('sfm_ref',refCode)}
+    else{refCode=slug(localStorage.getItem('sfm_ref')||'')}
+  }catch(e){}
+  if(refCode&&refin)refin.value=refCode;
+  function refLine(){var v=slug(refin&&refin.value)||refCode;return v?'\nReferred by: '+v:''}
+  document.getElementById('rewFriend').textContent=REWARD_FRIEND;
+  document.getElementById('rewYou').textContent=REWARD_YOU;
+  var refBanner=document.getElementById('refBanner');
+  if(refCode){
+    refBanner.hidden=false;
+    refBanner.innerHTML='';
+    var rb=document.createElement('span');rb.textContent='You were invited by ';
+    var rn=document.createElement('b');rn.textContent=refCode;
+    var rt=document.createElement('span');rt.textContent='. Your code is added to your order, so you get: '+REWARD_FRIEND+'.';
+    refBanner.appendChild(rb);refBanner.appendChild(rn);refBanner.appendChild(rt);
+  }
+  var refName=document.getElementById('refName'),refLinkEl=document.getElementById('refLink'),refCopy=document.getElementById('refCopy');
+  var refWa=document.getElementById('refWa'),refStatus=document.getElementById('refStatus');
+  var siteUrl=location.href.split('#')[0].split('?')[0];
+  function refUpdate(){
+    var c=slug(refName.value),link=siteUrl+'?ref='+c;
+    refStatus.textContent='';
+    if(!c){refLinkEl.textContent=t('Type your name to get your link.');refCopy.disabled=true;refWa.hidden=true;return}
+    refLinkEl.textContent=link;refCopy.disabled=false;refWa.hidden=false;
+    refWa.href='https://wa.me/?text='+encodeURIComponent('Get Roblox cloud AFK farming and items at SAD-A-F MART. Use my link and get '+REWARD_FRIEND+': '+link);
+  }
+  refName.addEventListener('input',refUpdate);
+  refCopy.addEventListener('click',function(){
+    var text=refLinkEl.textContent;
+    function pick(){var r=document.createRange();r.selectNodeContents(refLinkEl);var s=window.getSelection();s.removeAllRanges();s.addRange(r);refStatus.textContent='Link selected. Copy it manually.'}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){refStatus.textContent='Link copied. Send it to your friends.'},pick)}else{pick()}
+  });
+  var rbx=document.getElementById('rbx'),rbxOut=document.getElementById('rbxOut'),rbxAdd=document.getElementById('rbxAdd'),rbxN=0;
+  function rbxUpdate(){
+    var n=parseInt(rbx.value,10);
+    if(!(n>=1)){rbxOut.textContent=t('Enter an amount');rbxAdd.hidden=true;rbxN=0;return}
+    if(n>100000)n=100000;
+    var price=Math.round(n*RBX_RATE*100)/100;
+    rbxOut.textContent=n.toLocaleString()+' Robux = '+price.toLocaleString()+' TK';
+    rbxN=n;rbxAdd.hidden=false;
+  }
+  rbx.addEventListener('input',rbxUpdate);
+  refin.addEventListener('input',function(){build();rbxUpdate()});
+
+  /* Order counter: add the chosen plan to the cart */
+  var plan=document.getElementById('plan'),game=document.getElementById('game'),user=document.getElementById('user');
+  var status=document.getElementById('status'),planLine=document.getElementById('planLine'),planAdd=document.getElementById('planAdd');
+  var PLAN_ID={'12 hours':'p12','24 hours':'p24','48 hours':'p48','7 days':'p7','30 days':'p30'};
+  function build(){var p=plan.value.split('|');planLine.textContent=p[0]+' · '+p[1]}
+  plan.addEventListener('change',build);
+  document.getElementById('orderForm').addEventListener('submit',function(e){e.preventDefault()});
+  build();
+
+
+  refUpdate();rbxUpdate();
+
+  /* Reviews: shown publicly after the shop approves them (needs a free Firebase project) */
+  var FB={projectId:'sadafmart-6abd2',apiKey:'AIzaSyC_3DRxGo7BwEj1icqFRdMXKCY--3CyYXo'};
+  var live=!!(FB.projectId&&FB.apiKey);
+  var base='https://firestore.googleapis.com/v1/projects/'+FB.projectId+'/databases/(default)/documents';
+  var rating=0,starsBox=document.getElementById('stars'),rsend=document.getElementById('rsend');
+  var rname=document.getElementById('rname'),rtext=document.getElementById('rtext'),rstatus=document.getElementById('rstatus');
+  var rweb=document.getElementById('rweb'),rlist=document.getElementById('rlist');
+  var avgEl=document.getElementById('avg'),avgStars=document.getElementById('avgStars'),avgNote=document.getElementById('avgNote');
+  var starBtns=[];
+  function say(t,ok){rstatus.style.color=ok?'var(--ok)':'var(--accent-soft)';rstatus.textContent=t}
+  function paint(){
+    for(var i=0;i<starBtns.length;i++){
+      starBtns[i].className='star'+(i<rating?' on':'');
+      starBtns[i].setAttribute('aria-checked',(i+1===rating)?'true':'false');
+    }
+  }
+  for(var s=1;s<=5;s++){
+    (function(n){
+      var b=document.createElement('button');
+      b.type='button';b.className='star';b.textContent='★';
+      b.setAttribute('role','radio');b.setAttribute('aria-label',n+' star'+(n>1?'s':''));
+      b.addEventListener('click',function(){rating=n;paint();say('')});
+      starsBox.appendChild(b);starBtns.push(b);
+    })(s);
+  }
+  function renderReviews(list){
+    rlist.textContent='';
+    if(!list.length){avgEl.innerHTML='New <small>shop</small>';avgNote.textContent='No ratings yet. Be the first to rate the shop.';
+      for(var z=0;z<avgStars.children.length;z++)avgStars.children[z].className='star';return}
+    var sum=0;
+    list.forEach(function(r){
+      sum+=r.rating;
+      var c=document.createElement('article');c.className='rcard glass';
+      var w=document.createElement('div');w.className='who';w.textContent=r.name;
+      var st=document.createElement('div');st.className='rs';st.textContent=new Array(r.rating+1).join('★')+new Array(6-r.rating).join('☆');
+      var p=document.createElement('p');p.textContent=r.text;
+      var d=document.createElement('small');d.textContent=r.date;
+      c.appendChild(w);c.appendChild(st);c.appendChild(p);c.appendChild(d);rlist.appendChild(c);
+    });
+    var avg=sum/list.length;
+    avgEl.textContent=avg.toFixed(1)+' ';
+    var sm=document.createElement('small');sm.textContent='/ 5';avgEl.appendChild(sm);
+    for(var i=0;i<avgStars.children.length;i++)avgStars.children[i].className='star'+(i<Math.round(avg)?' on':'');
+    avgNote.textContent=list.length+(list.length===1?' review':' reviews')+' from buyers.';
+  }
+  function loadReviews(){
+    if(!live||!window.fetch)return;
+    fetch(base+':runQuery?key='+encodeURIComponent(FB.apiKey),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({structuredQuery:{from:[{collectionId:'reviews'}],
+        where:{fieldFilter:{field:{fieldPath:'approved'},op:'EQUAL',value:{booleanValue:true}}},limit:50}})
+    }).then(function(r){return r.json()}).then(function(rows){
+      var out=[];
+      (rows||[]).forEach(function(row){
+        if(!row.document)return;
+        var f=row.document.fields||{};
+        var t=f.createdAt&&f.createdAt.timestampValue?new Date(f.createdAt.timestampValue):null;
+        var n=parseInt(f.rating&&f.rating.integerValue,10);
+        if(!(n>=1&&n<=5))return;
+        out.push({name:(f.name&&f.name.stringValue)||'Buyer',rating:n,text:(f.text&&f.text.stringValue)||'',time:t?t.getTime():0,
+          date:t?t.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}):''});
+      });
+      out.sort(function(a,b){return b.time-a.time});
+      renderReviews(out);
+    }).catch(function(){});
+  }
+  rsend.addEventListener('click',function(){
+    var name=rname.value.trim(),text=rtext.value.trim();
+    if(!rating){say('Pick a star rating first.');return}
+    if(!name){say('Add your name or Roblox username.');return}
+    if(text.length<3){say('Write a short review.');return}
+    if(rweb.value){say('Thanks! Your review will show after the shop approves it.',true);return}
+    if(!live){say('Reviews are not switched on yet. Please try again later.');return}
+    try{var last=+localStorage.getItem('sfm_review_t')||0;if(Date.now()-last<60000){say('Please wait a minute before sending another review.');return}}catch(e){}
+    rsend.disabled=true;say('Sending...');
+    fetch(base+'/reviews?key='+encodeURIComponent(FB.apiKey),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:{
+        name:{stringValue:name.slice(0,40)},rating:{integerValue:String(rating)},text:{stringValue:text.slice(0,400)},
+        approved:{booleanValue:false},createdAt:{timestampValue:new Date().toISOString()}}})
+    }).then(function(r){
+      if(!r.ok)throw new Error('fail');
+      try{localStorage.setItem('sfm_review_t',String(Date.now()))}catch(e){}
+      rating=0;paint();rname.value='';rtext.value='';
+      say('Thanks! Your review will show after the shop approves it.',true);
+    }).catch(function(){say('Could not send your review. Please try again.')}).then(function(){rsend.disabled=false});
+  });
+  /* ---------- Language (English / Bangla) ---------- */
+  var BN={
+'Taking orders':'অর্ডার নেওয়া হচ্ছে',
+'Wallet':'ওয়ালেট','Deposit and pay with balance':'ডিপোজিট করুন এবং ব্যালেন্স দিয়ে পে করুন','Log in':'লগ ইন','Create account':'অ্যাকাউন্ট খুলুন','Username':'ইউজারনেম','Password':'পাসওয়ার্ড',
+'Usernames use letters, numbers and underscores. Keep your password safe, there is no password reset.':'ইউজারনেমে অক্ষর, সংখ্যা ও আন্ডারস্কোর ব্যবহার করুন। পাসওয়ার্ড নিরাপদে রাখুন, পাসওয়ার্ড রিসেট করা যায় না।',
+'Hi,':'হ্যালো,','Deposit':'ডিপোজিট','Log out':'লগ আউট','Refresh':'রিফ্রেশ','Deposit money':'টাকা ডিপোজিট করুন','Amount (TK)':'পরিমাণ (TK)','Payment method':'পেমেন্ট মাধ্যম','Transaction ID':'ট্রানজেকশন আইডি','Submit deposit':'ডিপোজিট জমা দিন',
+'Recent activity':'সাম্প্রতিক কার্যক্রম','No activity yet.':'এখনও কোনো কার্যক্রম নেই।','Send money to':'টাকা পাঠান','Then enter the transaction ID below.':'তারপর নিচে ট্রানজেকশন আইডি লিখুন।',
+'Deposits are not open yet. The shop has not added a payment number.':'ডিপোজিট এখনও চালু হয়নি। দোকান এখনও পেমেন্ট নম্বর যোগ করেনি।',
+'Pay with balance':'ব্যালেন্স দিয়ে পে করুন','Not enough balance. Deposit more in the Wallet section.':'ব্যালেন্স যথেষ্ট নয়। ওয়ালেট অংশে আরও ডিপোজিট করুন।',
+'Tell the shop on WhatsApp':'হোয়াটসঅ্যাপে দোকানকে জানান','Send deposit details on WhatsApp':'হোয়াটসঅ্যাপে ডিপোজিটের তথ্য পাঠান','Available after pending orders':'অপেক্ষমাণ অর্ডারের পর উপলব্ধ',
+'That username is taken.':'এই ইউজারনেম আগেই নেওয়া হয়েছে।','Wrong username or password.':'ইউজারনেম বা পাসওয়ার্ড ভুল।','Something went wrong. Please try again.':'কিছু একটা ভুল হয়েছে। আবার চেষ্টা করুন।',
+'Please wait...':'অপেক্ষা করুন...','Sending...':'পাঠানো হচ্ছে...','Password must be at least 6 characters.':'পাসওয়ার্ড কমপক্ষে 6 অক্ষরের হতে হবে।',
+'Use 3 to 20 letters, numbers or underscores for your username.':'ইউজারনেমে 3 থেকে 20টি অক্ষর, সংখ্যা বা আন্ডারস্কোর ব্যবহার করুন।',
+'Accounts are not switched on yet. Please contact the shop.':'অ্যাকাউন্ট এখনও চালু হয়নি। দোকানের সাথে যোগাযোগ করুন।','Too many tries. Try again later.':'অনেকবার চেষ্টা হয়েছে। পরে আবার চেষ্টা করুন।',
+'Enter the transaction ID from your payment message.':'পেমেন্ট মেসেজ থেকে ট্রানজেকশন আইডি লিখুন।','Deposit sent. Tap the button below so the shop sees it quickly.':'ডিপোজিট পাঠানো হয়েছে। দোকান যেন দ্রুত দেখে, তাই নিচের বাটনে চাপুন।',
+'Order placed with your balance. Tap the button below so the shop sees it quickly.':'আপনার ব্যালেন্স দিয়ে অর্ডার হয়েছে। দোকান যেন দ্রুত দেখে, তাই নিচের বাটনে চাপুন।',
+'Could not load your wallet. Pull to refresh or log in again.':'ওয়ালেট লোড করা যায়নি। রিফ্রেশ করুন বা আবার লগ ইন করুন।','Could not place the order. Please try again.':'অর্ডার করা যায়নি। আবার চেষ্টা করুন।',
+'pending':'অপেক্ষায়','approved':'অনুমোদিত','rejected':'বাতিল','done':'সম্পন্ন','cancelled':'বাতিল হয়েছে',
+
+'Skip to prices':'দামে যান','You are offline. Prices may be out of date.':'আপনি অফলাইনে আছেন। দাম পুরনো হতে পারে।',
+'All':'সব','Pets':'পেট',
+'Farm timer':'ফার্ম টাইমার','Pick a plan to see when your farm would end if you start now.':'এখন শুরু করলে আপনার ফার্ম কখন শেষ হবে তা দেখতে একটি প্ল্যান বেছে নিন।','Your farm would end on':'আপনার ফার্ম শেষ হবে',
+'Contact':'যোগাযোগ','Contact us':'যোগাযোগ করুন','Reach the shop':'দোকানে যোগাযোগ করুন','Open WhatsApp':'হোয়াটসঅ্যাপ খুলুন','Copy number':'নম্বর কপি করুন',
+'Tell your friends':'বন্ধুদের জানান','Send this shop to a friend.':'দোকানটি কোনো বন্ধুকে পাঠান।','Share this shop':'দোকান শেয়ার করুন',
+'Number copied.':'নম্বর কপি হয়েছে।','Link copied.':'লিংক কপি হয়েছে।','Note (optional)':'নোট (ঐচ্ছিক)',
+'Orders you started on this phone':'এই ফোনে শুরু করা অর্ডার','Reorder':'আবার অর্ডার করুন',
+
+'5 TK off your first order':'প্রথম অর্ডারে 5 TK ছাড়','10 TK credit for every friend who orders':'যে বন্ধু অর্ডার করবে তার জন্য 10 TK ক্রেডিট','You were invited by':'আপনাকে ইনভাইট করেছেন',
+'Prices':'দাম','Items':'আইটেম','Order':'অর্ডার','Refer a friend':'বন্ধুকে রেফার করুন','Reviews':'রিভিউ','FAQ':'প্রশ্নোত্তর',
+'Cloud AFK farming for Roblox. Pick a time slot, send your username, and your game keeps farming on our cloud instead of your phone or PC.':'Roblox-এর জন্য ক্লাউড AFK ফার্মিং। একটি সময় বেছে নিন, আপনার ইউজারনেম পাঠান, আর আপনার ফোন বা পিসি ছাড়াই আমাদের ক্লাউডে গেম ফার্ম হতে থাকবে।',
+'and other games':'এবং অন্যান্য গেম',
+'Message on WhatsApp':'হোয়াটসঅ্যাপে মেসেজ করুন','Facebook page':'ফেসবুক পেজ','Install app':'অ্যাপ ইনস্টল করুন',
+'To install on iPhone: tap the Share button in Safari, then Add to Home Screen.':'আইফোনে ইনস্টল করতে: সাফারিতে শেয়ার বাটনে চাপুন, তারপর Add to Home Screen বেছে নিন।',
+'WhatsApp: +8801708763962':'হোয়াটসঅ্যাপ: +8801708763962',
+'Why SAD-A-F MART':'কেন SAD-A-F MART',
+'No phone or PC needed':'ফোন বা পিসি লাগে না','Your game keeps farming on our cloud while your devices rest.':'আপনার ডিভাইস বিশ্রামে থাকলেও গেম আমাদের ক্লাউডে ফার্ম হতে থাকে।',
+'Clear prices in TK':'টাকায় পরিষ্কার দাম','Every plan and item has its price right on the page.':'প্রতিটি প্ল্যান ও আইটেমের দাম পেজেই দেওয়া আছে।',
+'Order on WhatsApp':'হোয়াটসঅ্যাপে অর্ডার','Send your order and talk to the shop directly.':'অর্ডার পাঠান এবং সরাসরি দোকানের সাথে কথা বলুন।',
+'Refer and save':'রেফার করুন, সাশ্রয় করুন','Share your link and earn rewards.':'আপনার লিংক শেয়ার করুন এবং রিওয়ার্ড পান।',
+'AFK farming prices':'AFK ফার্মিং-এর দাম','Cloud farming':'ক্লাউড ফার্মিং',
+'12 hours':'12 ঘণ্টা','24 hours':'24 ঘণ্টা','48 hours':'48 ঘণ্টা','7 days':'7 দিন','30 days':'30 দিন',
+'Overnight':'রাতভর','One night of farming.':'এক রাতের ফার্মিং।','Full day':'পুরো দিন','A full day and night.':'পুরো দিন ও রাত।',
+'Weekend':'উইকেন্ড','50 TK per day.':'দিনে 50 TK।','Weekly':'সাপ্তাহিক','About 34 TK per day.':'দিনে প্রায় 34 TK।',
+'Monthly':'মাসিক','About 21 TK per day.':'দিনে প্রায় 21 TK।','Best value':'সেরা মূল্য',
+'Add to cart':'কার্টে যোগ করুন','Add':'যোগ করুন',
+'All prices are in Bangladeshi Taka (TK).':'সব দাম বাংলাদেশি টাকায় (TK)।',
+'Roblox items':'Roblox আইটেম','Add items to your cart':'কার্টে আইটেম যোগ করুন',
+'Robux calculator':'রোবাক্স ক্যালকুলেটর','Enter an amount':'পরিমাণ লিখুন','1 TK per Robux.':'প্রতি Robux 1 TK।',
+'Grow a Garden pets':'Grow a Garden পেট','Tokens':'টোকেন','1,000 tokens':'1,000 টোকেন','Jackpot spins':'জ্যাকপট স্পিন','Price per spin':'প্রতি স্পিনের দাম',
+'How an order works':'অর্ডার করবেন যেভাবে','Pick a plan':'প্ল্যান বেছে নিন','Choose the hours and the game.':'সময় ও গেম বেছে নিন।',
+'Send the message':'মেসেজ পাঠান','Add items to your cart and send the order to the shop on WhatsApp.':'কার্টে আইটেম যোগ করুন এবং হোয়াটসঅ্যাপে দোকানে অর্ডার পাঠান।',
+'Farm starts':'ফার্ম শুরু হয়','Your game runs on our cloud for the time you paid for.':'আপনি যতক্ষণের জন্য টাকা দিয়েছেন, আপনার গেম আমাদের ক্লাউডে ততক্ষণ চলবে।',
+'Order counter':'অর্ডার কাউন্টার','Build your message':'আপনার মেসেজ তৈরি করুন','Plan':'প্ল্যান','Game':'গেম','Roblox username':'Roblox ইউজারনেম',
+'Referral code (optional)':'রেফারেল কোড (ঐচ্ছিক)','Message to send':'পাঠানোর মেসেজ','Copy message':'মেসেজ কপি করুন',
+'Send on WhatsApp':'হোয়াটসঅ্যাপে পাঠান','Open Facebook':'ফেসবুক খুলুন','Another game':'অন্য গেম',
+'Share and earn':'শেয়ার করুন, রিওয়ার্ড পান','Your friend gets':'আপনার বন্ধু পাবে','You get':'আপনি পাবেন',
+'Your name or Roblox username':'আপনার নাম বা Roblox ইউজারনেম',
+'Letters, numbers and underscores only. The shop checks every referral on WhatsApp before giving a reward.':'শুধু অক্ষর, সংখ্যা ও আন্ডারস্কোর। রিওয়ার্ড দেওয়ার আগে দোকান হোয়াটসঅ্যাপে প্রতিটি রেফারেল যাচাই করে।',
+'Your referral link':'আপনার রেফারেল লিংক','Copy link':'লিংক কপি করুন','Share on WhatsApp':'হোয়াটসঅ্যাপে শেয়ার করুন','Type your name to get your link.':'লিংক পেতে আপনার নাম লিখুন।',
+'Ratings and reviews':'রেটিং ও রিভিউ','From real buyers':'আসল ক্রেতাদের কাছ থেকে',
+'No ratings yet. Be the first to rate the shop.':'এখনও কোনো রেটিং নেই। দোকানকে প্রথম রেটিং দিন।',
+'Rate your order':'আপনার অর্ডার রেট করুন','Your rating':'আপনার রেটিং','Your review':'আপনার রিভিউ','Submit review':'রিভিউ জমা দিন',
+'Questions':'প্রশ্নোত্তর','Quick answers':'দ্রুত উত্তর',
+'How do I order?':'কীভাবে অর্ডার করব?','Add a plan or an item to your cart, then send the order to us on WhatsApp.':'একটি প্ল্যান বা আইটেম কার্টে যোগ করুন, তারপর হোয়াটসঅ্যাপে আমাদের কাছে অর্ডার পাঠান।',
+'Which games can you farm?':'কোন কোন গেম ফার্ম করেন?','Steal an Egg, Grow a Garden and other games. Message us on WhatsApp if your game is not listed.':'Steal an Egg, Grow a Garden এবং অন্যান্য গেম। আপনার গেম তালিকায় না থাকলে হোয়াটসঅ্যাপে মেসেজ করুন।',
+'What does cloud AFK farming mean?':'ক্লাউড AFK ফার্মিং মানে কী?','Your game keeps farming on our cloud for the time you choose, so it does not use your phone or PC.':'আপনার বেছে নেওয়া সময় পর্যন্ত আপনার গেম আমাদের ক্লাউডে ফার্ম হতে থাকে, তাই আপনার ফোন বা পিসি লাগে না।',
+'How do referrals work?':'রেফারেল কীভাবে কাজ করে?','Type your name in the Refer a friend section to get your link. When a friend opens it and orders, their order shows your name. The shop checks it and gives you both the reward.':'বন্ধুকে রেফার করুন অংশে আপনার নাম লিখে লিংক নিন। বন্ধু লিংকটি খুলে অর্ডার করলে তার অর্ডার মেসেজে আপনার নাম দেখা যাবে। দোকান যাচাই করে আপনাদের দুজনকে রিওয়ার্ড দেবে।',
+'How do I leave a review?':'রিভিউ কীভাবে দেব?','Use the Ratings and reviews section. Pick your stars and write a short review. The shop approves it before it shows on the site.':'রেটিং ও রিভিউ অংশে স্টার বেছে নিয়ে ছোট রিভিউ লিখুন। দোকান অনুমোদন করার পর সেটি সাইটে দেখা যাবে।',
+'How do I install the app?':'অ্যাপ কীভাবে ইনস্টল করব?','On Android, tap Install app at the top of the page or use your browser menu. On iPhone, tap Share in Safari, then Add to Home Screen.':'অ্যান্ড্রয়েডে পেজের উপরের অ্যাপ ইনস্টল করুন বাটনে চাপুন বা ব্রাউজার মেনু ব্যবহার করুন। আইফোনে সাফারিতে শেয়ার চেপে Add to Home Screen বেছে নিন।',
+'Roblox items and cloud AFK farming. Support on':'Roblox আইটেম ও ক্লাউড AFK ফার্মিং। সাপোর্ট:','or':'অথবা',
+'WhatsApp':'হোয়াটসঅ্যাপ','Cart':'কার্ট','Your cart':'আপনার কার্ট','Your cart is empty. Add a plan or an item.':'আপনার কার্ট খালি। একটি প্ল্যান বা আইটেম যোগ করুন।',
+'Total':'মোট','Game (for farming plans)':'গেম (ফার্মিং প্ল্যানের জন্য)','Send order on WhatsApp':'হোয়াটসঅ্যাপে অর্ডার পাঠান','Copy order':'অর্ডার কপি করুন','Clear cart':'কার্ট খালি করুন','Remove':'বাদ দিন',
+'Added to cart':'কার্টে যোগ হয়েছে','Enter a Robux amount first.':'আগে Robux-এর পরিমাণ লিখুন।','Add something to your cart first.':'আগে কার্টে কিছু যোগ করুন।','Order copied. Paste it in WhatsApp.':'অর্ডার কপি হয়েছে। হোয়াটসঅ্যাপে পেস্ট করুন।','Order selected. Copy it manually.':'অর্ডার সিলেক্ট হয়েছে। নিজে কপি করুন।'
+};
+  var BN2={
+'Completed':'সম্পন্ন','In progress':'চলমান','My orders':'আমার অর্ডার','Active':'চলমান','No completed orders yet.':'এখনো কোনো সম্পন্ন অর্ডার নেই।','No active orders.':'কোনো চলমান অর্ডার নেই।',
+'Chat':'চ্যাট','Send':'পাঠান','New':'নতুন','Shop':'দোকান','Order chat':'অর্ডার চ্যাট','Place order':'অর্ডার করুন','Log in to order':'অর্ডার করতে লগ ইন করুন','Deposit money':'টাকা ডিপোজিট করুন',
+'You need a wallet account to order. Deposit money, then place your order.':'অর্ডার করতে ওয়ালেট অ্যাকাউন্ট লাগবে। টাকা ডিপোজিট করে অর্ডার করুন।','Not enough balance':'ব্যালেন্স যথেষ্ট নয়',
+'Order placed! Open the order chat. The shop will talk to you there.':'অর্ডার হয়েছে! অর্ডার চ্যাট খুলুন। দোকান সেখানে আপনার সাথে কথা বলবে।','Open order chat':'অর্ডার চ্যাট খুলুন',
+'No messages yet. Say hi and the shop will reply here.':'এখনো কোনো মেসেজ নেই। হাই বলুন, দোকান এখানে উত্তর দেবে।','Could not load the chat.':'চ্যাট লোড করা যায়নি।','Could not send. Please try again.':'পাঠানো যায়নি। আবার চেষ্টা করুন।',
+'Write a message':'মেসেজ লিখুন','Order again':'আবার অর্ডার','Your plan':'আপনার প্ল্যান','Pick your plan':'প্ল্যান বেছে নিন','Ask a question on WhatsApp':'হোয়াটসঅ্যাপে প্রশ্ন করুন','WhatsApp support':'হোয়াটসঅ্যাপ সাপোর্ট',
+'Order on the website':'ওয়েবসাইটে অর্ডার','Pay with your wallet and chat with the shop about your order.':'ওয়ালেট দিয়ে পে করুন এবং অর্ডার নিয়ে দোকানের সাথে চ্যাট করুন।',
+'Pay with your wallet':'ওয়ালেট দিয়ে পে করুন','Add items to your cart and place the order with your balance.':'কার্টে আইটেম যোগ করুন এবং ব্যালেন্স দিয়ে অর্ডার করুন।',
+'Chat and receive':'চ্যাট করুন ও বুঝে নিন','The shop chats with you in your order chat, then gives you the item or starts your farm.':'দোকান অর্ডার চ্যাটে আপনার সাথে কথা বলে, তারপর আইটেম দেয় বা আপনার ফার্ম শুরু করে।',
+'Create an account, deposit money in the Wallet section, add a plan or an item to your cart and tap Place order. Then open your order chat. The shop will talk to you there and give you the item.':'অ্যাকাউন্ট খুলুন, ওয়ালেট অংশে টাকা ডিপোজিট করুন, কার্টে প্ল্যান বা আইটেম যোগ করে অর্ডার করুন। তারপর অর্ডার চ্যাট খুলুন। দোকান সেখানে কথা বলে আইটেম দেবে।',
+'Steal an Egg, Grow a Garden and other games. Ask us on WhatsApp if your game is not listed.':'Steal an Egg, Grow a Garden এবং অন্যান্য গেম। আপনার গেম তালিকায় না থাকলে হোয়াটসঅ্যাপে জিজ্ঞাসা করুন।',
+'Deposit sent. The shop will check it and add the money to your balance soon.':'ডিপোজিট পাঠানো হয়েছে। দোকান যাচাই করে শীঘ্রই আপনার ব্যালেন্সে টাকা যোগ করবে।'
+};
+  for(var bk in BN2)BN[bk]=BN2[bk];
+  var BNPH={
+'How many Robux?':'কত Robux লাগবে?','Your Roblox username':'আপনার Roblox ইউজারনেম','Who invited you?':'কে আপনাকে ইনভাইট করেছে?','Type your name':'আপনার নাম লিখুন',
+'Your name':'আপনার নাম','At least 6 characters':'কমপক্ষে 6 অক্ষর','From your payment message':'আপনার পেমেন্ট মেসেজ থেকে','e.g. siam_01':'যেমন siam_01','Anything we should know?':'আমাদের কিছু জানানোর আছে?','How was your order?':'আপনার অর্ডার কেমন ছিল?','Write a message':'মেসেজ লিখুন'
+};
+  var lang='en';
+  try{lang=localStorage.getItem('sfm_lang')==='bn'?'bn':'en'}catch(e){}
+  function t(k){return (lang==='bn'&&BN[k])?BN[k]:k}
+  var h1=document.querySelector('.hero h1'),H1_EN=h1.innerHTML,H1_BN='আপনি ঘুমালেও আপনার <span class="g">ফার্ম চলতেই থাকে</span>।';
+  var langBtn=document.getElementById('langBtn');
+  function applyLang(){
+    document.documentElement.lang=(lang==='bn')?'bn':'en';
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+      var p=n.parentNode.nodeName;
+      return (p==='SCRIPT'||p==='STYLE'||p==='TEXTAREA'||p==='PRE'||p==='NOSCRIPT')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
+    var nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+    nodes.forEach(function(n){
+      if(n._en===undefined){var k=n.nodeValue.trim();if(BN[k]){n._en=n.nodeValue;n._k=k}else{n._en=null}}
+      if(n._en===null)return;
+      n.nodeValue=(lang==='bn')?n._en.replace(n._k,BN[n._k]):n._en;
+    });
+    var phs=document.querySelectorAll('[placeholder]');
+    for(var i=0;i<phs.length;i++){
+      var e=phs[i];
+      if(e._ph===undefined)e._ph=e.getAttribute('placeholder');
+      e.setAttribute('placeholder',(lang==='bn'&&BNPH[e._ph])?BNPH[e._ph]:e._ph);
+    }
+    h1.innerHTML=(lang==='bn')?H1_BN:H1_EN;
+    langBtn.textContent=(lang==='bn')?'EN':'বাংলা';
+    refUpdate();rbxUpdate();renderCart();renderHist();timerUpdate();if(typeof walletRender==='function')walletRender();
+  }
+  langBtn.addEventListener('click',function(){
+    lang=(lang==='bn')?'en':'bn';
+    try{localStorage.setItem('sfm_lang',lang)}catch(e){}
+    applyLang();
+  });
+
+  /* ---------- Cart ---------- */
+  var cart=[];
+  try{cart=JSON.parse(localStorage.getItem('sfm_cart')||'[]')}catch(e){cart=[]}
+  if(!Array.isArray(cart))cart=[];
+  cart=cart.filter(function(l){return l&&typeof l.id==='string'&&typeof l.name==='string'&&isFinite(l.price)&&l.price>0&&l.qty>=1&&l.qty<=100000});
+  var cartEl=document.getElementById('cart'),cartList=document.getElementById('cartList'),cartEmpty=document.getElementById('cartEmpty');
+  var cartTotalEl=document.getElementById('cartTotal'),cartFab=document.getElementById('cartFab'),cartPlace=document.getElementById('cartPlace');
+  var cartStatus=document.getElementById('cartStatus'),cuser=document.getElementById('cuser'),cref=document.getElementById('cref'),cgame=document.getElementById('cgame');
+  var toastEl=document.getElementById('toast'),toastTimer=0;
+  try{cuser.value=localStorage.getItem('sfm_user')||''}catch(e){}
+  if(refCode)cref.value=refCode;
+  function saveCart(){try{localStorage.setItem('sfm_cart',JSON.stringify(cart))}catch(e){}}
+  function cartTotal(){var n=0;cart.forEach(function(l){n+=l.price*l.qty});return Math.round(n*100)/100}
+  function toast(msg){
+    toastEl.textContent=t(msg);toastEl.hidden=false;
+    clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.hidden=true},1800);
+  }
+  function cartText(){
+    var rc=slug(cref.value)||refCode,hasPlan=false;
+    var lines=cart.map(function(l){if(l.id.charAt(0)==='p'&&l.id.length<4)hasPlan=true;return '- '+l.name+' x'+l.qty+' = '+(l.price*l.qty)+' TK'});
+    var txt='Order:\n'+lines.join('\n')+'\nTotal: '+cartTotal()+' TK';
+    if(hasPlan)txt+='\nGame: '+cgame.value;
+    txt+='\nMy Roblox username: '+(cuser.value.trim()||'(your username)');
+    if(rc)txt+='\nReferred by: '+rc;
+    var nt=cnote.value.trim();if(nt)txt+='\nNote: '+nt;
+    return txt;
+  }
+  function renderCart(){
+    var total=cartTotal();
+    cartFab.hidden=!cart.length;
+    cartFab.textContent=t('Cart')+' · '+total+' TK';
+    cartTotalEl.textContent=total+' TK';
+    cartEmpty.hidden=cart.length>0;
+    cartList.innerHTML='';
+    cart.forEach(function(l,i){
+      var li=document.createElement('li');
+      var nm=document.createElement('span');nm.className='cn';nm.textContent=l.name;
+      var tt=document.createElement('span');tt.className='ct';tt.textContent=(l.price*l.qty)+' TK';
+      var q=document.createElement('span');q.className='qty';
+      var mi=document.createElement('button');mi.type='button';mi.textContent='−';mi.setAttribute('aria-label','-');
+      var qv=document.createElement('span');qv.textContent=l.qty;
+      var pl=document.createElement('button');pl.type='button';pl.textContent='+';pl.setAttribute('aria-label','+');
+      var st=l.step||1;
+      mi.addEventListener('click',function(){l.qty-=st;if(l.qty<1)cart.splice(i,1);saveCart();renderCart()});
+      pl.addEventListener('click',function(){l.qty=Math.min(100000,l.qty+st);saveCart();renderCart()});
+      q.appendChild(mi);q.appendChild(qv);q.appendChild(pl);
+      var rm=document.createElement('button');rm.type='button';rm.className='rm';rm.textContent=t('Remove');
+      rm.addEventListener('click',function(){cart.splice(i,1);saveCart();renderCart()});
+      li.appendChild(nm);li.appendChild(tt);li.appendChild(q);li.appendChild(rm);
+      cartList.appendChild(li);
+    });
+    if(typeof payUpdate==='function')payUpdate();
+    if(!cart.length&&!cartEl.hidden&&!payDone)closeCart();
+  }
+  function addToCart(id,name,price,qty,step){
+    var f=null;
+    cart.forEach(function(l){if(l.id===id)f=l});
+    if(f)f.qty=Math.min(100000,f.qty+qty);else cart.push({id:id,name:name,price:price,qty:qty,step:step||1});
+    saveCart();renderCart();toast('Added to cart');
+    try{if(navigator.vibrate)navigator.vibrate(15)}catch(e){}
+  }
+  var lastFocus=null;
+  function openCart(){lastFocus=document.activeElement;cartEl.hidden=false;document.body.style.overflow='hidden';renderCart();document.getElementById('cartClose').focus()}
+  function closeCart(){cartEl.hidden=true;payDone=false;cartChat.hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+  cartFab.addEventListener('click',openCart);
+  document.getElementById('cartClose').addEventListener('click',closeCart);
+  document.getElementById('cartBg').addEventListener('click',closeCart);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!cartEl.hidden)closeCart()});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('button.add'):null;
+    if(!b)return;
+    var box=b.closest('[data-id]');
+    if(!box)return;
+    addToCart(box.getAttribute('data-id'),box.getAttribute('data-name'),parseFloat(box.getAttribute('data-price')),1,1);
+  });
+  rbxAdd.addEventListener('click',function(){
+    if(!(rbxN>=1)){toast('Enter a Robux amount first.');return}
+    addToCart('robux','Robux',RBX_RATE,rbxN,100);
+  });
+  cuser.addEventListener('input',function(){try{localStorage.setItem('sfm_user',cuser.value.trim())}catch(e){}renderCart()});
+  cref.addEventListener('input',renderCart);
+  cgame.addEventListener('change',renderCart);
+  document.getElementById('cartClear').addEventListener('click',function(){cart=[];saveCart();renderCart()});
+
+  /* ---------- Announcement (shop owner: type a message here to show a banner, leave empty to hide it) ---------- */
+  var ANNOUNCEMENT='';
+  (function(){
+    var box=document.getElementById('announce');
+    if(!ANNOUNCEMENT)return;
+    var seen='';try{seen=localStorage.getItem('sfm_ann')||''}catch(e){}
+    if(seen===ANNOUNCEMENT)return;
+    document.getElementById('annText').textContent=ANNOUNCEMENT;box.hidden=false;
+    document.getElementById('annClose').addEventListener('click',function(){box.hidden=true;try{localStorage.setItem('sfm_ann',ANNOUNCEMENT)}catch(e){}});
+  })();
+
+  /* ---------- Highlight the section you are reading in the menu ---------- */
+  (function(){
+    if(!('IntersectionObserver' in window))return;
+    var links={},navs=document.querySelectorAll('.nav a');
+    for(var i=0;i<navs.length;i++)links[navs[i].getAttribute('href').slice(1)]=navs[i];
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting)return;
+        for(var k in links)links[k].classList.remove('on');
+        if(links[en.target.id])links[en.target.id].classList.add('on');
+      });
+    },{rootMargin:'-20% 0px -70% 0px'});
+    for(var id in links){var el=document.getElementById(id);if(el)io.observe(el)}
+  })();
+
+  /* ---------- Wallet: accounts, deposits and balance (Firebase) ---------- */
+  /* Shop owner: put your real payment numbers here. A method without a number is hidden. */
+  var PAY_METHODS=[{name:'bKash',number:'01708763962'},{name:'Nagad',number:'01708763962'}];
+  var MIN_DEPOSIT=20;
+  var payDone=false,auth=null,wallet={balance:0,pending:0,acts:[],orders:[]},wmode='in';
+  function g(id){return document.getElementById(id)}
+  var walOut=g('walOut'),walIn=g('walIn'),wmsg=g('wmsg'),dmsg=g('dmsg'),navWallet=g('navWallet');
+  var cartPayNote=g('cartPayNote'),cartChat=g('cartChat'),lastOrderId='',oFilter='active';
+  function say(el,msg,ok){el.style.color=ok?'var(--ok)':'var(--accent-soft)';el.textContent=msg?t(msg):''}
+  function jfetch(url,opt){
+    return fetch(url,opt).then(function(r){return r.text().then(function(tx){var j={};try{j=JSON.parse(tx)}catch(e){}return {ok:r.ok,status:r.status,json:j}})});
+  }
+  function tsv(d){return {timestampValue:d.toISOString()}}
+  function numOf(f){if(!f)return 0;if(f.integerValue!==undefined)return parseInt(f.integerValue,10)||0;if(f.doubleValue!==undefined)return +f.doubleValue||0;return 0}
+  function strOf(f){return (f&&f.stringValue)||''}
+  function money(n){return String(Math.round(n*100)/100)}
+  var IDT='https://identitytoolkit.googleapis.com/v1/accounts:';
+  function emailOf(u){return u+'@sadafmart.app'}
+  function saveSession(){try{localStorage.setItem('sfm_auth',JSON.stringify({uid:auth.uid,username:auth.username,refresh:auth.refresh}))}catch(e){}}
+  function loadSession(){
+    try{
+      var o=JSON.parse(localStorage.getItem('sfm_auth')||'null');
+      if(o&&o.uid&&o.refresh&&o.username)auth={uid:o.uid,username:o.username,refresh:o.refresh,idToken:'',exp:0};
+    }catch(e){}
+  }
+  function setAuth(j,u){auth={uid:j.localId,username:u,idToken:j.idToken,refresh:j.refreshToken,exp:Date.now()+(parseInt(j.expiresIn,10)||3600)*1000};saveSession()}
+  function logout(){
+    auth=null;wallet={balance:0,pending:0,acts:[],orders:[]};closeChat();
+    try{localStorage.removeItem('sfm_auth')}catch(e){}
+    walletRender();
+  }
+  function authCall(kind,u,pw){
+    return jfetch(IDT+kind+'?key='+encodeURIComponent(FB.apiKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:emailOf(u),password:pw,returnSecureToken:true})});
+  }
+  function authErr(m){
+    m=String(m||'');
+    if(m.indexOf('EMAIL_EXISTS')===0)return 'That username is taken.';
+    if(m.indexOf('OPERATION_NOT_ALLOWED')===0)return 'Accounts are not switched on yet. Please contact the shop.';
+    if(m.indexOf('WEAK_PASSWORD')===0)return 'Password must be at least 6 characters.';
+    if(m.indexOf('TOO_MANY_ATTEMPTS')===0)return 'Too many tries. Try again later.';
+    if(m.indexOf('INVALID_LOGIN_CREDENTIALS')===0||m.indexOf('EMAIL_NOT_FOUND')===0||m.indexOf('INVALID_PASSWORD')===0)return 'Wrong username or password.';
+    return 'Something went wrong. Please try again.';
+  }
+  function refreshTok(){
+    var rt=auth&&auth.refresh;
+    return jfetch('https://securetoken.googleapis.com/v1/token?key='+encodeURIComponent(FB.apiKey),{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(rt||'')}).then(function(r){
+      if(!r.ok||!r.json.id_token){if(r.status===400||r.status===401)logout();throw new Error('auth')}
+      if(!auth)throw new Error('auth');
+      auth.idToken=r.json.id_token;auth.refresh=r.json.refresh_token||auth.refresh;
+      auth.exp=Date.now()+(parseInt(r.json.expires_in,10)||3600)*1000;saveSession();
+      return auth.idToken;
+    });
+  }
+  function token(){
+    if(!auth)return Promise.reject(new Error('auth'));
+    if(auth.idToken&&Date.now()<auth.exp-60000)return Promise.resolve(auth.idToken);
+    return refreshTok();
+  }
+  function fs(method,path,body){
+    function go(tok){return jfetch(base+path,{method:method,headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})}
+    return token().then(go).then(function(r){
+      if(r.status===401&&auth){auth.idToken='';return token().then(go)}
+      return r;
+    });
+  }
+  function createUserDoc(){
+    return fs('POST','/users?documentId='+encodeURIComponent(auth.uid),{fields:{username:{stringValue:auth.username},balance:{integerValue:'0'},createdAt:tsv(new Date())}});
+  }
+  function query(coll){
+    return fs('POST',':runQuery',{structuredQuery:{from:[{collectionId:coll}],where:{fieldFilter:{field:{fieldPath:'uid'},op:'EQUAL',value:{stringValue:auth.uid}}},limit:30}});
+  }
+  function loadActs(){
+    return Promise.all([query('deposits'),query('orders')]).then(function(rs){
+      var acts=[],pending=0,ords=[];
+      [['deposit',rs[0]],['order',rs[1]]].forEach(function(pair){
+        var kind=pair[0],r=pair[1];
+        if(!r.ok||!Array.isArray(r.json))return;
+        r.json.forEach(function(row){
+          if(!row.document)return;
+          var f=row.document.fields||{},st=strOf(f.status),amt=kind==='deposit'?numOf(f.amount):numOf(f.total);
+          if(kind==='order'&&st==='pending')pending+=amt;
+          var tm=f.createdAt&&f.createdAt.timestampValue?Date.parse(f.createdAt.timestampValue):0;
+          acts.push({kind:kind,amt:amt,st:st,meth:strOf(f.method),time:tm});
+          if(kind==='order')ords.push({id:row.document.name.split('/').pop(),amt:amt,st:st,text:strOf(f.itemsText),time:tm});
+        });
+      });
+      acts.sort(function(a,b){return b.time-a.time});
+      ords.sort(function(a,b){return b.time-a.time});
+      wallet.acts=acts.slice(0,12);wallet.pending=pending;wallet.orders=ords;
+    });
+  }
+  var walletBusy=false;
+  function walletRefresh(){
+    if(!auth||walletBusy)return Promise.resolve();
+    walletBusy=true;
+    return fs('GET','/users/'+encodeURIComponent(auth.uid)).then(function(r){
+      if(r.status===404)return createUserDoc().then(function(){return {ok:true,json:{fields:{balance:{integerValue:'0'}}}}});
+      return r;
+    }).then(function(r){
+      if(!r.ok)throw new Error('user');
+      wallet.balance=numOf(r.json.fields&&r.json.fields.balance);
+      return loadActs();
+    }).then(function(){walletBusy=false;walletRender();loadCounts()}).catch(function(){
+      walletBusy=false;walletRender();
+      if(auth)say(dmsg,'Could not load your wallet. Pull to refresh or log in again.');
+    });
+  }
+  function setMode(m){
+    wmode=m;
+    g('tabIn').classList.toggle('on',m==='in');g('tabUp').classList.toggle('on',m==='up');
+    g('wgo').textContent=t(m==='in'?'Log in':'Create account');
+    g('wpass').setAttribute('autocomplete',m==='in'?'current-password':'new-password');
+  }
+  function methods(){return PAY_METHODS.filter(function(m){return m.number})}
+  function depInfo(){
+    var ms=methods(),sel=g('dmeth'),cur=sel.value;
+    g('dnone').hidden=ms.length>0;g('dform').hidden=ms.length===0;
+    if(sel.options.length!==ms.length){
+      sel.innerHTML='';
+      ms.forEach(function(m){var o=document.createElement('option');o.value=m.name;o.textContent=m.name;sel.appendChild(o)});
+      if(cur)sel.value=cur;
+    }
+    var m=null;ms.forEach(function(x){if(x.name===sel.value)m=x});
+    var box=g('dinst');box.textContent='';
+    if(m){
+      var a=document.createElement('span');a.textContent=t('Send money to')+' ';
+      var b=document.createElement('b');b.textContent=m.number+' ('+m.name+')';
+      var c=document.createElement('span');c.textContent='. '+t('Then enter the transaction ID below.');
+      box.appendChild(a);box.appendChild(b);box.appendChild(c);
+    }
+  }
+  function stLabel(st){return t(st==='done'?'Completed':st==='pending'?'In progress':st)}
+  function seenKey(id){return 'sfm_seen_'+id}
+  function getSeen(id){try{return +localStorage.getItem(seenKey(id))||0}catch(e){return 0}}
+  function setSeen(id,n){try{localStorage.setItem(seenKey(id),String(n))}catch(e){}}
+  var msgCount={};
+  function renderOrders(){
+    var ul=g('oList');ul.innerHTML='';
+    g('oActive').classList.toggle('on',oFilter==='active');g('oDone').classList.toggle('on',oFilter==='done');
+    var list=wallet.orders.filter(function(o){return oFilter==='done'?(o.st==='done'||o.st==='cancelled'):(o.st!=='done'&&o.st!=='cancelled')});
+    if(!list.length){var e=document.createElement('li'),es=document.createElement('span');es.className='hs';es.textContent=t(oFilter==='done'?'No completed orders yet.':'No active orders.');e.appendChild(es);ul.appendChild(e);return}
+    list.forEach(function(o){
+      var li=document.createElement('li'),sp=document.createElement('span');sp.className='hs';
+      var when=o.time?new Date(o.time).toLocaleDateString(undefined,{day:'numeric',month:'short'})+' · ':'';
+      var b=document.createElement('b');b.textContent=money(o.amt)+' TK';
+      sp.appendChild(document.createTextNode(when));sp.appendChild(b);
+      var sm=(o.text||'').replace(/^Order:\n/,'').split('\n').filter(function(l){return l.charAt(0)==='-'}).map(function(l){return l.slice(2).replace(/ = .*$/,'')}).join(', ');
+      if(sm.length>80)sm=sm.slice(0,77)+'...';
+      sp.appendChild(document.createTextNode(' · '+stLabel(o.st)+(sm?' · '+sm:'')));
+      var m=msgCount[o.id];
+      if(m&&m.admin>getSeen(o.id)){var nw=document.createElement('span');nw.className='nw';nw.textContent=t('New');sp.appendChild(nw)}
+      var bt=document.createElement('button');bt.type='button';bt.textContent=t('Chat');
+      bt.addEventListener('click',function(){openChat(o.id)});
+      li.appendChild(sp);li.appendChild(bt);ul.appendChild(li);
+    });
+  }
+  function loadCounts(){
+    if(!auth)return Promise.resolve();
+    return fs('POST',':runQuery',{structuredQuery:{from:[{collectionId:'messages'}],where:{fieldFilter:{field:{fieldPath:'uid'},op:'EQUAL',value:{stringValue:auth.uid}}},limit:300}}).then(function(r){
+      if(!r.ok||!Array.isArray(r.json))return;
+      var c={};
+      r.json.forEach(function(row){if(!row.document)return;var f=row.document.fields||{},id=strOf(f.orderId);if(!c[id])c[id]={admin:0,all:0};c[id].all++;if(strOf(f.from)==='admin')c[id].admin++});
+      msgCount=c;renderOrders();
+    }).catch(function(){});
+  }
+  function walletRender(){
+    var inn=!!auth;
+    walOut.hidden=inn;walIn.hidden=!inn;
+    navWallet.textContent=inn?(t('Wallet')+' · '+money(wallet.balance)+' TK'):t('Wallet');
+    setMode(wmode);
+    if(inn){
+      g('wname').textContent=auth.username;
+      g('wbal').textContent=money(wallet.balance);
+      g('wavail').textContent=wallet.pending>0?(t('Available after pending orders')+': '+money(Math.max(0,wallet.balance-wallet.pending))+' TK'):'';
+      depInfo();renderOrders();
+      var ul=g('wact');ul.innerHTML='';
+      if(!wallet.acts.length){var e=document.createElement('li');var es=document.createElement('span');es.className='hs';es.textContent=t('No activity yet.');e.appendChild(es);ul.appendChild(e)}
+      wallet.acts.forEach(function(a){
+        var li=document.createElement('li'),sp=document.createElement('span');sp.className='hs';
+        var when=a.time?new Date(a.time).toLocaleDateString(undefined,{day:'numeric',month:'short'})+' · ':'';
+        var what=a.kind==='deposit'?(t('Deposit')+' +'+money(a.amt)+' TK'+(a.meth?' · '+a.meth:'')):(t('Order')+' −'+money(a.amt)+' TK');
+        sp.textContent=when+what+' · '+stLabel(a.st);
+        li.appendChild(sp);ul.appendChild(li);
+      });
+    }
+    payUpdate();
+  }
+  function payUpdate(){
+    var show=cart.length>0;
+    cartPlace.hidden=!show;cartPayNote.hidden=true;
+    if(!show)return;
+    if(!auth){cartPlace.textContent=t('Log in to order');cartPlace.disabled=false;cartPayNote.hidden=false;cartPayNote.textContent=t('You need a wallet account to order. Deposit money, then place your order.');return}
+    var av=Math.max(0,wallet.balance-wallet.pending),tot=Math.round(cartTotal());
+    cartPlace.textContent=t('Place order')+' ('+tot+' TK)';
+    cartPlace.disabled=false;
+    if(tot>av){cartPlace.textContent=t('Deposit money');cartPayNote.hidden=false;cartPayNote.textContent=t('Not enough balance')+' ('+money(av)+' TK). '+t('Deposit more in the Wallet section.')}
+  }
+  function goWallet(open){
+    closeCart();
+    var w=document.getElementById('wallet');if(w&&w.scrollIntoView)w.scrollIntoView({behavior:'smooth',block:'start'});
+    if(open&&auth){g('wdep').hidden=false;depInfo()}
+  }
+
+  g('tabIn').addEventListener('click',function(){setMode('in');say(wmsg,'')});
+  g('tabUp').addEventListener('click',function(){setMode('up');say(wmsg,'')});
+  g('wgo').addEventListener('click',function(){
+    var u=(g('wuser').value||'').trim().toLowerCase(),pw=g('wpass').value,up=wmode==='up',btn=g('wgo');
+    if(!/^[a-z0-9_]{3,20}$/.test(u)){say(wmsg,'Use 3 to 20 letters, numbers or underscores for your username.');return}
+    if(pw.length<6){say(wmsg,'Password must be at least 6 characters.');return}
+    btn.disabled=true;say(wmsg,'Please wait...',true);
+    authCall(up?'signUp':'signInWithPassword',u,pw).then(function(r){
+      if(!r.ok||!r.json.idToken){say(wmsg,authErr(r.json&&r.json.error&&r.json.error.message));return}
+      setAuth(r.json,u);g('wpass').value='';
+      return (up?createUserDoc():Promise.resolve()).then(function(){return walletRefresh()}).then(function(){say(wmsg,'')});
+    }).catch(function(){say(wmsg,'Something went wrong. Please try again.')}).then(function(){btn.disabled=false});
+  });
+  g('wpass').addEventListener('keydown',function(e){if(e.key==='Enter')g('wgo').click()});
+  g('wlogout').addEventListener('click',logout);
+  g('wrefresh').addEventListener('click',function(){walletRefresh()});
+  g('wdepBtn').addEventListener('click',function(){var d=g('wdep');d.hidden=!d.hidden;depInfo()});
+  g('dmeth').addEventListener('change',depInfo);
+  g('dsend').addEventListener('click',function(){
+    if(!auth)return;
+    var amt=parseInt(g('damt').value,10),m=g('dmeth').value,trx=(g('dtrx').value||'').trim(),btn=g('dsend');
+    if(!(amt>=MIN_DEPOSIT&&amt<=50000)){dmsg.style.color='var(--accent-soft)';dmsg.textContent=t('Deposit')+': '+MIN_DEPOSIT+' - 50000 TK.';return}
+    if(!/^[A-Za-z0-9]{4,30}$/.test(trx)){say(dmsg,'Enter the transaction ID from your payment message.');return}
+    btn.disabled=true;say(dmsg,'Sending...',true);
+    fs('POST','/deposits',{fields:{uid:{stringValue:auth.uid},username:{stringValue:auth.username},amount:{integerValue:String(amt)},method:{stringValue:m},trxId:{stringValue:trx},status:{stringValue:'pending'},createdAt:tsv(new Date())}}).then(function(r){
+      if(!r.ok)throw new Error('dep');
+      var id=String(r.json.name||'').split('/').pop();
+      g('damt').value='';g('dtrx').value='';
+      say(dmsg,'Deposit sent. The shop will check it and add the money to your balance soon.',true);
+      return walletRefresh();
+    }).catch(function(){say(dmsg,'Something went wrong. Please try again.')}).then(function(){btn.disabled=false});
+  });
+  cartPlace.addEventListener('click',function(){
+    if(!cart.length){cartStatus.textContent=t('Add something to your cart first.');return}
+    if(!auth){goWallet(false);return}
+    var tot=Math.round(cartTotal()),av=Math.max(0,wallet.balance-wallet.pending);
+    if(tot>av){goWallet(true);return}
+    var text=cartText().slice(0,800),snapshot=cart.map(function(l){return {id:l.id,name:l.name,price:l.price,qty:l.qty,step:l.step||1}});
+    cartPlace.disabled=true;cartStatus.style.color='var(--accent-soft)';cartStatus.textContent=t('Sending...');
+    fs('POST','/orders',{fields:{uid:{stringValue:auth.uid},username:{stringValue:auth.username},itemsText:{stringValue:text},total:{integerValue:String(tot)},status:{stringValue:'pending'},createdAt:tsv(new Date())}}).then(function(r){
+      if(!r.ok)throw new Error('order');
+      lastOrderId=String(r.json.name||'').split('/').pop();
+      orders.unshift({t:Date.now(),total:tot,items:snapshot});orders=orders.slice(0,5);
+      try{localStorage.setItem('sfm_orders',JSON.stringify(orders))}catch(e){}
+      renderHist();
+      payDone=true;cart=[];saveCart();renderCart();
+      cartChat.hidden=false;cartStatus.style.color='var(--ok)';cartStatus.textContent=t('Order placed! Open the order chat. The shop will talk to you there.');
+      return walletRefresh();
+    }).catch(function(){cartStatus.style.color='var(--accent-soft)';cartStatus.textContent=t('Could not place the order. Please try again.')}).then(function(){payUpdate()});
+  });
+  cartChat.addEventListener('click',function(){var id=lastOrderId;closeCart();if(id)openChat(id)});
+  planAdd.addEventListener('click',function(){
+    var p=plan.value.split('|'),id=PLAN_ID[p[0]];if(!id)return;
+    var price=parseFloat(p[1]);if(!(price>0))return;
+    var nm=p[0]+' AFK farming';
+    try{var u=user.value.trim();if(u){cuser.value=u;localStorage.setItem('sfm_user',u)}}catch(e){}
+    cgame.value=game.value;
+    addToCart(id,nm,price,1,1);status.style.color='var(--ok)';status.textContent=t('Added to cart');
+  });
+
+  /* ---------- Order chat ---------- */
+  var chatEl=g('chat'),chatLog=g('chatLog'),chatIn=g('chatIn'),chatMsg=g('chatMsg'),chatId='',chatTimer=0,chatBusy=false,chatLast=0;
+  function closeChat(){
+    if(!chatEl||chatEl.hidden)return;
+    chatEl.hidden=true;chatId='';clearInterval(chatTimer);
+    if(cartEl.hidden)document.body.style.overflow='';
+  }
+  function drawChat(list){
+    var near=chatLog.scrollHeight-chatLog.scrollTop-chatLog.clientHeight<80,first=!chatLog.childNodes.length;
+    chatLog.innerHTML='';
+    if(!list.length){var p=document.createElement('p');p.className='fine';p.style.margin='auto';p.textContent=t('No messages yet. Say hi and the shop will reply here.');chatLog.appendChild(p)}
+    list.forEach(function(m){
+      var d=document.createElement('div');d.className='cm '+(m.from==='admin'?'them':'me');
+      d.appendChild(document.createTextNode(m.text));
+      var sm=document.createElement('small');sm.textContent=(m.from==='admin'?t('Shop')+' · ':'')+(m.time?new Date(m.time).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'}):'');
+      d.appendChild(sm);chatLog.appendChild(d);
+    });
+    if(first||near)chatLog.scrollTop=chatLog.scrollHeight;
+  }
+  function loadChat(){
+    if(!auth||!chatId||chatBusy)return Promise.resolve();
+    chatBusy=true;var id=chatId;
+    return fs('POST',':runQuery',{structuredQuery:{from:[{collectionId:'messages'}],where:{compositeFilter:{op:'AND',filters:[
+      {fieldFilter:{field:{fieldPath:'uid'},op:'EQUAL',value:{stringValue:auth.uid}}},
+      {fieldFilter:{field:{fieldPath:'orderId'},op:'EQUAL',value:{stringValue:id}}}]}},limit:200}}).then(function(r){
+      if(id!==chatId)return;
+      if(!r.ok||!Array.isArray(r.json)){chatMsg.style.color='var(--accent-soft)';chatMsg.textContent=t('Could not load the chat.');return}
+      chatMsg.textContent='';
+      var list=[],adm=0;
+      r.json.forEach(function(row){if(!row.document)return;var f=row.document.fields||{};var m={from:strOf(f.from),text:strOf(f.text),time:f.createdAt&&f.createdAt.timestampValue?Date.parse(f.createdAt.timestampValue):0};if(m.from==='admin')adm++;list.push(m)});
+      list.sort(function(a,b){return a.time-b.time});
+      drawChat(list);setSeen(id,adm);msgCount[id]={admin:adm,all:list.length};renderOrders();
+    }).catch(function(){}).then(function(){chatBusy=false});
+  }
+  function openChat(id){
+    var o=null;wallet.orders.forEach(function(x){if(x.id===id)o=x});
+    chatId=id;chatLog.innerHTML='';chatMsg.textContent='';chatIn.value='';
+    g('chatInfo').textContent=o?(t('Order')+' · '+money(o.amt)+' TK · '+stLabel(o.st)):'';
+    chatEl.hidden=false;document.body.style.overflow='hidden';
+    loadChat();clearInterval(chatTimer);chatTimer=setInterval(function(){if(!document.hidden)loadChat()},8000);
+    setTimeout(function(){try{chatIn.focus()}catch(e){}},50);
+  }
+  function sendChat(){
+    var tx=chatIn.value.trim();if(!tx||!auth||!chatId)return;
+    var btn=g('chatGo');btn.disabled=true;
+    fs('POST','/messages',{fields:{uid:{stringValue:auth.uid},orderId:{stringValue:chatId},from:{stringValue:'buyer'},text:{stringValue:tx.slice(0,500)},createdAt:tsv(new Date())}}).then(function(r){
+      if(!r.ok)throw new Error('send');
+      chatIn.value='';chatMsg.textContent='';chatBusy=false;return loadChat();
+    }).catch(function(){chatMsg.style.color='var(--accent-soft)';chatMsg.textContent=t('Could not send. Please try again.')}).then(function(){btn.disabled=false});
+  }
+  g('chatGo').addEventListener('click',sendChat);
+  chatIn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();sendChat()}});
+  g('chatClose').addEventListener('click',closeChat);g('chatBg').addEventListener('click',closeChat);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeChat()});
+  g('oActive').addEventListener('click',function(){oFilter='active';renderOrders()});
+  g('oDone').addEventListener('click',function(){oFilter='done';renderOrders()});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&auth)walletRefresh()});
+  loadSession();
+  if(auth)walletRefresh();
+  setInterval(function(){if(auth&&!document.hidden)walletRefresh()},30000);
+
+  /* ---------- More features ---------- */
+  var cnote=document.getElementById('cnote');
+  cnote.addEventListener('input',renderCart);
+
+  /* item type chips */
+  (function(){
+    var chips=document.querySelectorAll('#chips .chip'),groups=document.querySelectorAll('.group[data-cat]');
+    for(var i=0;i<chips.length;i++){
+      chips[i].addEventListener('click',function(){
+        var cat=this.getAttribute('data-cat');
+        for(var j=0;j<chips.length;j++)chips[j].classList.toggle('on',chips[j]===this);
+        for(var k=0;k<groups.length;k++)groups[k].hidden=(cat!=='all'&&groups[k].getAttribute('data-cat')!==cat);
+      });
+    }
+  })();
+
+  /* farm timer */
+  var tplan=document.getElementById('tplan'),tout=document.getElementById('tout');
+  function timerUpdate(){
+    var h=parseInt(tplan.value,10),d=new Date(Date.now()+h*3600000);
+    tout.textContent=t('Your farm would end on')+' '+d.toLocaleString(undefined,{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
+  }
+  tplan.addEventListener('change',timerUpdate);
+  setInterval(timerUpdate,60000);
+
+  /* recent orders on this phone */
+  function okLine(l){return l&&typeof l.id==='string'&&typeof l.name==='string'&&isFinite(l.price)&&l.price>0&&l.qty>=1&&l.qty<=100000}
+  var orders=[];
+  try{orders=JSON.parse(localStorage.getItem('sfm_orders')||'[]')}catch(e){orders=[]}
+  if(!Array.isArray(orders))orders=[];
+  orders=orders.filter(function(o){return o&&isFinite(o.t)&&Array.isArray(o.items)&&o.items.every(okLine)}).slice(0,5);
+  var histBox=document.getElementById('hist'),histList=document.getElementById('histList');
+  function renderHist(){
+    histList.innerHTML='';
+    histBox.hidden=!orders.length;
+    orders.forEach(function(o){
+      var li=document.createElement('li');
+      var sm=o.items.map(function(l){return l.name+' x'+l.qty}).join(', ');
+      if(sm.length>90)sm=sm.slice(0,87)+'...';
+      var sp=document.createElement('span');sp.className='hs';
+      sp.textContent=new Date(o.t).toLocaleDateString(undefined,{day:'numeric',month:'short'})+' · '+o.total+' TK · '+sm;
+      var bt=document.createElement('button');bt.type='button';bt.textContent=t('Reorder');
+      bt.addEventListener('click',function(){
+        cart=o.items.map(function(l){return {id:l.id,name:l.name,price:l.price,qty:l.qty,step:l.step||1}});
+        saveCart();renderCart();toast('Added to cart');
+      });
+      li.appendChild(sp);li.appendChild(bt);histList.appendChild(li);
+    });
+  }
+  /* contact: copy number and share */
+  function copyText(txt,msg){
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast(msg)},function(){toast(txt)})}
+    else{toast(txt)}
+  }
+  document.getElementById('copyNum').addEventListener('click',function(){copyText('+8801708763962','Number copied.')});
+  document.getElementById('shareSite').addEventListener('click',function(){
+    if(navigator.share){navigator.share({title:'SAD-A-F MART',text:'Roblox cloud AFK farming, Robux and items.',url:siteUrl}).catch(function(){})}
+    else{copyText(siteUrl,'Link copied.')}
+  });
+
+  /* offline notice */
+  var offEl=document.getElementById('offline');
+  function net(){offEl.hidden=(navigator.onLine!==false)}
+  window.addEventListener('online',net);window.addEventListener('offline',net);net();
+
+  /* scroll progress and back to top */
+  var prog=document.getElementById('prog'),toTop=document.getElementById('toTop'),ticking=false;
+  function onScroll(){
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(function(){
+      var h=document.documentElement.scrollHeight-window.innerHeight,y=window.pageYOffset||0;
+      prog.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+      toTop.hidden=y<700;ticking=false;
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+  applyLang();
+
+  /* Install as an app */
+  var installBtn=document.getElementById('install'),iosHint=document.getElementById('iosHint'),deferred=null;
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone;
+  if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){
+    window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+  }
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault();deferred=e;if(!standalone)installBtn.hidden=false;
+  });
+  installBtn.addEventListener('click',function(){
+    if(!deferred)return;
+    deferred.prompt();
+    deferred.userChoice.then(function(){deferred=null;installBtn.hidden=true});
+  });
+  window.addEventListener('appinstalled',function(){installBtn.hidden=true});
+  if(!standalone&&/iphone|ipad|ipod/i.test(navigator.userAgent))iosHint.hidden=false;
+  loadReviews();
+})();
+</script>
+</body>
+</html>
