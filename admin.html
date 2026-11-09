@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SAD-A-F MART Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0E0720">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="admin.webmanifest">
+<link rel="icon" href="admin-192.png">
+<link rel="apple-touch-icon" href="admin-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--bg:#0E0720;--card:#1a0f33;--card2:#241545;--line:#3a2766;--tx:#f1eafd;--mut:#a99bd0;--acc:#a855f7;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:640px;margin:0 auto;padding:14px 16px 40px}
+header{position:sticky;top:0;z-index:5;background:rgba(14,7,32,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top))}
+header .row{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px}
+header h1{font-size:17px;margin:0;flex:1}
+header h1 small{display:block;font-size:12px;color:var(--mut);font-weight:400}
+.ibtn{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;min-height:40px}
+.tabs{display:flex;gap:6px;max-width:640px;margin:10px auto 0;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;min-height:40px}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700}
+.tab b{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:999px;background:var(--warn);color:#1a0f33;font-size:12px}
+.tab b.z{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.card h3{margin:0 0 4px;font-size:16px}
+.meta{color:var(--mut);font-size:13px}
+.big{font-size:22px;font-weight:800}
+.row2{display:flex;gap:8px;margin-top:12px}
+.btn{flex:1;border:0;border-radius:10px;padding:12px;font-weight:700;cursor:pointer;min-height:46px;background:var(--acc);color:#fff}
+.btn.ok{background:#16a34a}.btn.no{background:#b91c1c}.btn.ghost{background:var(--card2);border:1px solid var(--line)}
+.btn:disabled{opacity:.5}
+pre{white-space:pre-wrap;word-break:break-word;margin:8px 0 0;font:14px/1.4 inherit;background:var(--card2);border-radius:10px;padding:10px}
+.f{display:grid;gap:10px}
+input,select{width:100%;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:46px}
+label{font-size:13px;color:var(--mut)}
+.msg{min-height:1.4em;font-size:14px;margin:8px 0 0}
+.empty{text-align:center;color:var(--mut);padding:30px 10px}
+.stars{color:var(--warn);letter-spacing:2px}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:2px 10px;background:var(--card2);border:1px solid var(--line);color:var(--mut)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#fff;color:#1a0f33;padding:12px 18px;border-radius:12px;font-weight:700;z-index:20;max-width:90vw}
+[hidden]{display:none!important}
+.login{min-height:80vh;display:flex;align-items:center}
+.login .card{width:100%}
+</style>
+</head>
+<body>
+
+<div id="loginView" class="wrap login" hidden>
+  <div class="card">
+    <h3 style="font-size:20px">SAD-A-F MART Admin</h3>
+    <p class="meta">Owner only. Log in with your shop account.</p>
+    <form class="f" id="loginForm" autocomplete="on">
+      <div><label for="lu">Username</label><input id="lu" autocomplete="username" autocapitalize="none" spellcheck="false" required></div>
+      <div><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" required></div>
+      <button class="btn" id="lbtn" type="submit">Log in</button>
+    </form>
+    <p class="msg" id="lmsg" role="status"></p>
+  </div>
+</div>
+
+<div id="appView" hidden>
+  <header>
+    <div class="row">
+      <h1>SAD-A-F Admin<small id="who"></small></h1>
+      <button class="ibtn" id="refresh" type="button" aria-label="Refresh">Refresh</button>
+      <button class="ibtn" id="logout" type="button">Log out</button>
+    </div>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-t="deposits" type="button">Deposits<b id="c_deposits" class="z">0</b></button>
+      <button class="tab" data-t="orders" type="button">Orders<b id="c_orders" class="z">0</b></button>
+      <button class="tab" data-t="reviews" type="button">Reviews<b id="c_reviews" class="z">0</b></button>
+      <button class="tab" data-t="users" type="button">Users</button>
+    </div>
+  </header>
+  <div class="wrap">
+    <p class="msg" id="gmsg" role="status"></p>
+    <div id="list"></div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+'use strict';
+var FB={projectId:'sadafmart-6abd2',apiKey:'AIzaSyC_3DRxGo7BwEj1icqFRdMXKCY--3CyYXo'};
+var DB='projects/'+FB.projectId+'/databases/(default)/documents';
+var BASE='https://firestore.googleapis.com/v1/'+DB;
+var IDT='https://identitytoolkit.googleapis.com/v1/accounts:';
+var auth=null,tab='deposits',data={deposits:[],orders:[],reviews:[],users:[]},usersById={},busy=false,timer=null,uq='';
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function jf(url,opt){return fetch(url,opt).then(function(r){return r.text().then(function(t){var j={};try{j=JSON.parse(t)}catch(e){}return {ok:r.ok,status:r.status,json:j}})})}
+function sv(f){return (f&&f.stringValue)||''}
+function nv(f){if(!f)return 0;if(f.integerValue!==undefined)return parseInt(f.integerValue,10)||0;if(f.doubleValue!==undefined)return +f.doubleValue||0;return 0}
+function tv(f){return f&&f.timestampValue?Date.parse(f.timestampValue):0}
+function when(ms){if(!ms)return '';var d=new Date(ms);return d.toLocaleDateString(undefined,{day:'numeric',month:'short'})+' '+d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'})}
+function toast(m){var t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2600)}
+function emailOf(u){return u.trim().toLowerCase()+'@sadafmart.app'}
+
+/* ---- session ---- */
+function save(){try{localStorage.setItem('sfa_auth',JSON.stringify({uid:auth.uid,username:auth.username,refresh:auth.refresh}))}catch(e){}}
+function load(){try{var o=JSON.parse(localStorage.getItem('sfa_auth')||'null');if(o&&o.uid&&o.refresh)auth={uid:o.uid,username:o.username,refresh:o.refresh,idToken:'',exp:0}}catch(e){}}
+function logout(){auth=null;try{localStorage.removeItem('sfa_auth')}catch(e){}clearInterval(timer);show()}
+function token(){
+  if(!auth)return Promise.reject(new Error('auth'));
+  if(auth.idToken&&Date.now()<auth.exp-60000)return Promise.resolve(auth.idToken);
+  return jf('https://securetoken.googleapis.com/v1/token?key='+encodeURIComponent(FB.apiKey),{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(auth.refresh)}).then(function(r){
+    if(!r.ok||!r.json.id_token){if(r.status===400||r.status===401)logout();throw new Error('auth')}
+    auth.idToken=r.json.id_token;auth.refresh=r.json.refresh_token||auth.refresh;auth.exp=Date.now()+(parseInt(r.json.expires_in,10)||3600)*1000;save();return auth.idToken;
+  });
+}
+function api(method,url,body){
+  function go(tk){return jf(url,{method:method,headers:{'Authorization':'Bearer '+tk,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined})}
+  return token().then(go).then(function(r){if(r.status===401&&auth){auth.idToken='';return token().then(go)}return r});
+}
+function runQ(coll,field,val){
+  var q={from:[{collectionId:coll}],limit:100};
+  if(field)q.where={fieldFilter:{field:{fieldPath:field},op:'EQUAL',value:val}};
+  return api('POST',BASE+':runQuery',{structuredQuery:q});
+}
+function commit(writes){return api('POST',BASE+':commit',{writes:writes})}
+function docName(coll,id){return DB+'/'+coll+'/'+id}
+
+/* ---- load ---- */
+function rows(r){return (Array.isArray(r.json)?r.json:[]).filter(function(x){return x.document}).map(function(x){var d=x.document;return {id:d.name.split('/').pop(),f:d.fields||{},ut:d.updateTime}})}
+function loadAll(){
+  if(busy)return Promise.resolve();busy=true;
+  return Promise.all([
+    runQ('deposits','status',{stringValue:'pending'}),
+    runQ('orders','status',{stringValue:'pending'}),
+    runQ('reviews','approved',{booleanValue:false}),
+    runQ('users')
+  ]).then(function(rs){
+    if(rs.some(function(r){return r.status===403})){
+      $('gmsg').style.color='var(--bad)';$('gmsg').textContent='This account is not the admin. Check the rules and your UID.';return;
+    }
+    $('gmsg').textContent='';
+    data.deposits=rows(rs[0]).sort(function(a,b){return tv(a.f.createdAt)-tv(b.f.createdAt)});
+    data.orders=rows(rs[1]).sort(function(a,b){return tv(a.f.createdAt)-tv(b.f.createdAt)});
+    data.reviews=rows(rs[2]).sort(function(a,b){return tv(b.f.createdAt)-tv(a.f.createdAt)});
+    data.users=rows(rs[3]).sort(function(a,b){return nv(b.f.balance)-nv(a.f.balance)});
+    usersById={};data.users.forEach(function(u){usersById[u.id]=u});
+  }).catch(function(){$('gmsg').style.color='var(--bad)';$('gmsg').textContent='Could not load. Check your internet.'}).then(function(){busy=false;paint()});
+}
+
+/* ---- paint ---- */
+function badge(id,n){var b=$('c_'+id);b.textContent=n;b.className=n?'':'z'}
+function paint(){
+  badge('deposits',data.deposits.length);badge('orders',data.orders.length);badge('reviews',data.reviews.length);
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(b){b.classList.toggle('on',b.dataset.t===tab)});
+  var h='';
+  if(tab==='deposits'){
+    h=data.deposits.length?data.deposits.map(function(d){var f=d.f;return '<div class="card"><div class="big">'+nv(f.amount)+' TK</div><h3>'+esc(sv(f.username))+'</h3><div class="meta">'+esc(sv(f.method))+' · '+when(tv(f.createdAt))+'</div><pre>TrxID: '+esc(sv(f.trxId))+'</pre><div class="row2"><button class="btn no" data-a="dep-no" data-id="'+d.id+'" type="button">Reject</button><button class="btn ok" data-a="dep-ok" data-id="'+d.id+'" type="button">Approve</button></div></div>'}).join(''):'<div class="empty">No pending deposits.</div>';
+  }else if(tab==='orders'){
+    h=data.orders.length?data.orders.map(function(d){var f=d.f,u=usersById[sv(f.uid)],bal=u?nv(u.f.balance):0,tot=nv(f.total);return '<div class="card"><div class="big">'+tot+' TK</div><h3>'+esc(sv(f.username))+'</h3><div class="meta">'+when(tv(f.createdAt))+' · balance '+bal+' TK'+(bal<tot?' <span style="color:var(--bad)">(not enough)</span>':'')+'</div><pre>'+esc(sv(f.itemsText))+'</pre><div class="row2"><button class="btn no" data-a="ord-no" data-id="'+d.id+'" type="button">Cancel</button><button class="btn ok" data-a="ord-ok" data-id="'+d.id+'" type="button">Mark done</button></div></div>'}).join(''):'<div class="empty">No pending orders.</div>';
+  }else if(tab==='reviews'){
+    h=data.reviews.length?data.reviews.map(function(d){var f=d.f,n=nv(f.rating);return '<div class="card"><div class="stars">'+'★'.repeat(n)+'☆'.repeat(5-n)+'</div><h3>'+esc(sv(f.name))+'</h3><div class="meta">'+when(tv(f.createdAt))+'</div><pre>'+esc(sv(f.text))+'</pre><div class="row2"><button class="btn no" data-a="rev-no" data-id="'+d.id+'" type="button">Delete</button><button class="btn ok" data-a="rev-ok" data-id="'+d.id+'" type="button">Approve</button></div></div>'}).join(''):'<div class="empty">No reviews waiting.</div>';
+  }else{
+    var list=data.users.filter(function(u){return !uq||sv(u.f.username).toLowerCase().indexOf(uq)>-1});
+    h='<input id="usearch" placeholder="Search username" value="'+esc(uq)+'" autocapitalize="none">'+(list.length?list.map(function(u){return '<div class="card"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><h3>'+esc(sv(u.f.username))+'</h3><div class="meta">Joined '+when(tv(u.f.createdAt))+'</div></div><div class="big">'+nv(u.f.balance)+' TK</div></div><div class="row2"><button class="btn ghost" data-a="bal" data-id="'+u.id+'" type="button">Adjust balance</button></div></div>'}).join(''):'<div class="empty">No users.</div>');
+  }
+  var keep=document.activeElement&&document.activeElement.id==='usearch';
+  $('list').innerHTML=h;
+  if(keep){var s=$('usearch');s.focus();s.setSelectionRange(s.value.length,s.value.length)}
+}
+
+/* ---- actions ---- */
+function find(coll,id){return data[coll].filter(function(x){return x.id===id})[0]}
+function pre(ut){return ut?{updateTime:ut}:{exists:true}}
+function act(btn,fn){
+  if(btn.disabled)return;btn.disabled=true;
+  fn().then(function(r){
+    if(r&&r.ok){toast('Done');return loadAll()}
+    if(r&&r.status===400||r&&r.status===409||r&&r.status===412){toast('Already changed. Refreshing');return loadAll()}
+    toast('Failed. Try again.');
+  }).catch(function(){toast('No connection')}).then(function(){btn.disabled=false});
+}
+function onAct(e){
+  var b=e.target.closest('button[data-a]');if(!b)return;
+  var a=b.dataset.a,id=b.dataset.id,d;
+  if(a==='dep-ok'){
+    d=find('deposits',id);if(!d)return;var amt=nv(d.f.amount),uid=sv(d.f.uid);
+    if(!confirm('Approve '+amt+' TK for '+sv(d.f.username)+'? This adds it to their balance.'))return;
+    act(b,function(){return commit([
+      {update:{name:docName('deposits',id),fields:{status:{stringValue:'approved'}}},updateMask:{fieldPaths:['status']},currentDocument:pre(d.ut)},
+      {transform:{document:docName('users',uid),fieldTransforms:[{fieldPath:'balance',increment:{integerValue:String(amt)}}]},currentDocument:{exists:true}}
+    ])});
+  }else if(a==='dep-no'){
+    d=find('deposits',id);if(!d)return;if(!confirm('Reject this deposit?'))return;
+    act(b,function(){return commit([{update:{name:docName('deposits',id),fields:{status:{stringValue:'rejected'}}},updateMask:{fieldPaths:['status']},currentDocument:pre(d.ut)}])});
+  }else if(a==='ord-ok'){
+    d=find('orders',id);if(!d)return;var tot=nv(d.f.total),uid2=sv(d.f.uid),u=usersById[uid2];
+    if(!u||nv(u.f.balance)<tot){toast('Not enough balance. Cancel it or add balance first.');return}
+    if(!confirm('Mark done and take '+tot+' TK from '+sv(d.f.username)+'?'))return;
+    act(b,function(){return commit([
+      {update:{name:docName('orders',id),fields:{status:{stringValue:'done'}}},updateMask:{fieldPaths:['status']},currentDocument:pre(d.ut)},
+      {transform:{document:docName('users',uid2),fieldTransforms:[{fieldPath:'balance',increment:{integerValue:String(-tot)}}]},currentDocument:{exists:true}}
+    ])});
+  }else if(a==='ord-no'){
+    d=find('orders',id);if(!d)return;if(!confirm('Cancel this order? No money is taken.'))return;
+    act(b,function(){return commit([{update:{name:docName('orders',id),fields:{status:{stringValue:'cancelled'}}},updateMask:{fieldPaths:['status']},currentDocument:pre(d.ut)}])});
+  }else if(a==='rev-ok'){
+    d=find('reviews',id);if(!d)return;
+    act(b,function(){return commit([{update:{name:docName('reviews',id),fields:{approved:{booleanValue:true}}},updateMask:{fieldPaths:['approved']},currentDocument:pre(d.ut)}])});
+  }else if(a==='rev-no'){
+    if(!confirm('Delete this review for good?'))return;
+    act(b,function(){return commit([{delete:docName('reviews',id)}])});
+  }else if(a==='bal'){
+    d=find('users',id);if(!d)return;
+    var v=prompt('Change balance for '+sv(d.f.username)+' (now '+nv(d.f.balance)+' TK).\nType +50 to add or -50 to remove:','');
+    if(v==null)return;v=v.trim();
+    if(!/^[+-]?\d{1,6}$/.test(v)||+v===0){toast('Type a number like +50 or -50');return}
+    var n=parseInt(v,10);
+    if(nv(d.f.balance)+n<0){toast('Balance cannot go below 0');return}
+    act(b,function(){return commit([{transform:{document:docName('users',id),fieldTransforms:[{fieldPath:'balance',increment:{integerValue:String(n)}}]},currentDocument:{exists:true}}])});
+  }
+}
+
+/* ---- views ---- */
+function show(){
+  var inn=!!auth;
+  $('loginView').hidden=inn;$('appView').hidden=!inn;
+  if(inn){$('who').textContent=auth.username;loadAll();clearInterval(timer);timer=setInterval(function(){if(!document.hidden)loadAll()},30000)}
+}
+$('loginForm').addEventListener('submit',function(e){
+  e.preventDefault();var u=$('lu').value.trim(),p=$('lp').value,m=$('lmsg'),b=$('lbtn');
+  m.style.color='var(--mut)';m.textContent='Logging in...';b.disabled=true;
+  jf(IDT+'signInWithPassword?key='+encodeURIComponent(FB.apiKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:emailOf(u),password:p,returnSecureToken:true})}).then(function(r){
+    if(!r.ok){m.style.color='var(--bad)';m.textContent='Wrong username or password.';return}
+    auth={uid:r.json.localId,username:u.toLowerCase(),idToken:r.json.idToken,refresh:r.json.refreshToken,exp:Date.now()+(parseInt(r.json.expiresIn,10)||3600)*1000};
+    save();$('lp').value='';m.textContent='';show();
+  }).catch(function(){m.style.color='var(--bad)';m.textContent='No connection.'}).then(function(){b.disabled=false});
+});
+$('tabs').addEventListener('click',function(e){var b=e.target.closest('.tab');if(!b)return;tab=b.dataset.t;paint()});
+$('list').addEventListener('click',onAct);
+$('list').addEventListener('input',function(e){if(e.target.id==='usearch'){uq=e.target.value.trim().toLowerCase();paint()}});
+$('refresh').addEventListener('click',function(){loadAll().then(function(){toast('Updated')})});
+$('logout').addEventListener('click',logout);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&auth)loadAll()});
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('admin-sw.js',{scope:'./admin.html'}).catch(function(){})})}
+load();show();
+})();
+</script>
+</body>
+</html>
